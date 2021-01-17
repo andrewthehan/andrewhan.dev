@@ -1,8 +1,8 @@
-export default function Header({ config }) {
+export default function Header({ config, activated }) {
   return (
     <section className="header">
       <img
-        className="logo"
+        className={activated ? "logo-activated" : "logo"}
         src={config.logo}
         alt="logo"
         width="64"

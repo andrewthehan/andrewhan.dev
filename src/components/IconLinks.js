@@ -1,10 +1,12 @@
 import { IconContext } from "react-icons";
 import IconLink from "./IconLink";
 
-export default function IconLinks({ config }) {
+export default function IconLinks({ config, activated }) {
   return (
     <section className="icon-links">
-      <IconContext.Provider value={{ className: "icon" }}>
+      <IconContext.Provider
+        value={{ className: activated ? "icon-activated" : "icon" }}
+      >
         {config["icon-links"].map((iconLinkProps, i) => (
           <IconLink key={i} {...iconLinkProps} />
         ))}

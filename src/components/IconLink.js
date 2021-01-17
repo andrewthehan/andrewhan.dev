@@ -18,6 +18,7 @@ export default function IconLink({ name, icon, url }) {
         href={url}
         target="_blank"
         rel="noopener noreferrer"
+        title={name}
         aria-label={name}
       >
         {renderIcon(icon)}

@@ -43,8 +43,25 @@ body,
 
 .logo {
   margin: 16px;
-  border-radius: 16%;
-  border: 4px outset var(--highlight-color);
+  border-radius: 50%;
+  border: 4px solid var(--highlight-color);
+}
+
+.logo-activated {
+  margin: 16px;
+  border-radius: 50%;
+  border: 4px solid var(--highlight-color);
+
+  animation: logo-activated 3s infinite linear;
+}
+
+@keyframes logo-activated {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .icon-links {
@@ -61,4 +78,17 @@ body,
 
 .icon:hover {
   color: var(--highlight-color);
+}
+
+.icon-activated {
+  animation: icon-activated 1s infinite linear alternate;
+}
+
+@keyframes icon-activated {
+  0% {
+    color: var(--foreground-color);
+  }
+  100% {
+    color: var(--highlight-color);
+  }
 }
