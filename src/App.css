@@ -74,21 +74,40 @@ body,
 
 .icon {
   color: var(--foreground-color);
+  transition: all 0.1s ease-in;
 }
 
 .icon:hover {
   color: var(--highlight-color);
+  transform: translate(0px, -3px);
 }
 
-.icon-activated {
-  animation: icon-activated 1s infinite linear alternate;
+.icon-link:nth-child(odd) > .icon-activated {
+  animation: icon-activated-odd 1s infinite ease-in-out alternate;
 }
 
-@keyframes icon-activated {
+.icon-link:nth-child(even) > .icon-activated {
+  animation: icon-activated-even 1s infinite ease-in-out alternate;
+}
+
+@keyframes icon-activated-odd {
   0% {
     color: var(--foreground-color);
+    transform: translate(0px, 3px);
   }
   100% {
     color: var(--highlight-color);
+    transform: translate(0px, -3px);
+  }
+}
+
+@keyframes icon-activated-even {
+  0% {
+    color: var(--highlight-color);
+    transform: translate(0px, -3px);
+  }
+  100% {
+    color: var(--foreground-color);
+    transform: translate(0px, 3px);
   }
 }
