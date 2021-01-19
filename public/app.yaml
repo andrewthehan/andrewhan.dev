@@ -14,9 +14,9 @@ handlers:
 
   - url: /(precache-manifest.*)$
     secure: always
-    mime_type: application/javascript
     static_files: \1
     upload: (precache-manifest.*)$
+    mime_type: application/javascript
 
   - url: /(.*\.js)$
     secure: always
@@ -30,6 +30,11 @@ handlers:
     upload: .*\.(css|map|png|jpg|svg|ico|json|txt|woff)$
 
   - url: "/"
+    secure: always
+    static_files: index.html
+    upload: index.html
+
+  - url: "/index.html"
     secure: always
     static_files: index.html
     upload: index.html

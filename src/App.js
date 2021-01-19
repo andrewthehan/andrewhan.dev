@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import IconLinks from "./components/IconLinks";
@@ -22,14 +22,19 @@ function App() {
   const [activated, setActivated] = useState(false);
 
   return (
-    <div className="container">
-      <Header config={config} activated={activated} />
-      <IconLinks config={config} activated={activated} />
-      <KeySequenceListener
-        sequence={KONAMI_CODE}
-        action={() => setActivated(!activated)}
-      />
-    </div>
+    <Fragment>
+      <a className="skip-link" href="#main">
+        Skip to main
+      </a>
+      <main className="container" id="main">
+        <Header config={config} activated={activated} />
+        <IconLinks config={config} activated={activated} />
+        <KeySequenceListener
+          sequence={KONAMI_CODE}
+          action={() => setActivated(!activated)}
+        />
+      </main>
+    </Fragment>
   );
 }
 
