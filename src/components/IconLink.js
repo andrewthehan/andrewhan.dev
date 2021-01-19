@@ -1,28 +1,22 @@
-import React, { lazy, Suspense } from "react";
+import React from "react";
+import * as Icons from "../Icons";
 
 export default function IconLink({ name, icon, url }) {
   function renderIcon(icon) {
-    const Icon = lazy(() =>
-      import("react-icons/all").then((m) => ({
-        default: m[icon],
-      }))
-    );
-
+    const Icon = Icons[icon];
     return <Icon />;
   }
 
   return (
-    <Suspense fallback={<span>.</span>}>
-      <a
-        className="icon-link"
-        href={url}
-        target="_blank"
-        rel="noopener noreferrer"
-        title={name}
-        aria-label={name}
-      >
-        {renderIcon(icon)}
-      </a>
-    </Suspense>
+    <a
+      className="icon-link"
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      title={name}
+      aria-label={name}
+    >
+      {renderIcon(icon)}
+    </a>
   );
 }

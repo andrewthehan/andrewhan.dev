@@ -1,4 +1,4 @@
-import { IconContext } from "react-icons";
+import { IconContext } from "@react-icons/all-files";
 import IconLink from "./IconLink";
 
 export default function IconLinks({ config, activated }) {
