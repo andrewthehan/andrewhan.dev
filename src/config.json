@@ -1,8 +1,8 @@
 {
   "name": "Andrew Han",
   "logo": "https://raw.githubusercontent.com/andrewthehan/butterfly/master/butterfly.png",
-  "logo-link": "https://github.com/andrewthehan/butterfly",
-  "icon-links": [
+  "logoLink": "https://github.com/andrewthehan/butterfly",
+  "iconLinks": [
     {
       "name": "Code",
       "icon": "FaCode",
@@ -12,6 +12,11 @@
       "name": "Career",
       "icon": "FaLinkedinIn",
       "url": "https://career.andrewhan.dev/"
+    },
+    {
+      "name": "Piano",
+      "icon": "CgPiano",
+      "url": "https://piano.andrewhan.dev/"
     },
     {
       "name": "Stream",

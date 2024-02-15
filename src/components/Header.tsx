@@ -1,8 +1,16 @@
-export default function Header({ config, activated }) {
+import React from "react";
+import Config from "../Config";
+
+type Props = {
+  config: Config;
+  activated: boolean;
+};
+
+export default function Header({ config, activated }: Props) {
   return (
     <section className="header">
       <a
-        href={config["logo-link"]}
+        href={config.logoLink}
         target="_blank"
         rel="noopener noreferrer"
         title="Butterfly"

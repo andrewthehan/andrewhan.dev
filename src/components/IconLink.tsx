@@ -1,9 +1,15 @@
 import React from "react";
 import * as Icons from "../Icons";
 
-export default function IconLink({ name, icon, url }) {
-  function renderIcon(icon) {
-    const Icon = Icons[icon];
+type Props = {
+  name: string;
+  icon: string;
+  url: string;
+};
+
+export default function IconLink({ name, icon, url }: Props) {
+  function renderIcon(icon: string) {
+    const Icon = (Icons as any)[icon];
     return <Icon />;
   }
 
