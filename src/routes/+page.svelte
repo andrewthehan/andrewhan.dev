@@ -75,6 +75,15 @@
 <svelte:head>
   <title>Andrew Han</title>
   <meta name="description" content="Andrew Han's personal site" />
+
+  <meta property="og:url" content="https://andrewhan.dev/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Andrew Han" />
+  <meta property="og:description" content="Andrew Han's personal site" />
+  <meta
+    property="og:image"
+    content="https://raw.githubusercontent.com/andrewthehan/butterfly/master/butterfly.png"
+  />
 </svelte:head>
 
 <div class="app">
