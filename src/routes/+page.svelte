@@ -74,7 +74,9 @@
 
 <section>
   <p>
-    I am a software engineer with a passion for code design, games, and <a href="/music">music</a>.
+    Hello! I'm a software engineer with a passion for code design, games, and <a href="/music"
+      >music</a
+    >.
   </p>
 
   <div class="buttons">
