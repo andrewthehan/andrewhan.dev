@@ -13,6 +13,7 @@
 }
 
 body {
+  margin: 0;
   background: var(--background-color);
   color: var(--foreground-color);
 }
