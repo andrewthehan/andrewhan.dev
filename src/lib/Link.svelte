@@ -18,7 +18,9 @@
   rel="noopener noreferrer"
   onclick={alertMessage != null ? () => alert(alertMessage) : null}
 >
-  {@render icon()}
+  <div class="icon">
+    {@render icon()}
+  </div>
   <p class="name">{name}</p>
   <p class="description">{description}</p>
 </a>
@@ -36,6 +38,11 @@
 
   p {
     margin: 0;
+  }
+
+  .icon {
+    display: flex;
+    align-items: center;
   }
 
   .name {
