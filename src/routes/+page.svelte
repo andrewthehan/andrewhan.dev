@@ -7,6 +7,7 @@
   import PianoIcon from "virtual:icons/lucide/piano";
   import DiscordIcon from "virtual:icons/simple-icons/discord";
   import GithubIcon from "virtual:icons/simple-icons/github";
+  import KofiIcon from "virtual:icons/simple-icons/kofi";
   import LinkedinIcon from "virtual:icons/simple-icons/linkedin";
   import SteamIcon from "virtual:icons/simple-icons/steam";
   import TwitchIcon from "virtual:icons/simple-icons/twitch";
@@ -30,6 +31,12 @@
       description: "andrewthehan",
       link: "https://github.com/andrewthehan",
       icon: GithubIcon,
+    },
+    {
+      name: "Ko-fi",
+      description: "andrewthehan",
+      link: "https://ko-fi.com/andrewthehan",
+      icon: KofiIcon,
     },
     {
       name: "Steam",
@@ -80,21 +87,9 @@
 </script>
 
 <section>
-  <p>
-    Hello! I'm a software engineer with a passion for code design, games, and <a href="/music"
-      >music</a
-    >.
-  </p>
-
-  <div class="buttons">
-    <a href="https://ko-fi.com/andrewthehan" target="_blank" rel="noopener noreferrer">
-      <img
-        height="36"
-        src="https://storage.ko-fi.com/cdn/widget/kofi_new_button.png"
-        alt="Tip me at ko-fi.com"
-      />
-    </a>
-  </div>
+  Hello! I'm a software engineer with a passion for code design, games, and <a href="/music"
+    >music</a
+  >.
 </section>
 
 <section>
@@ -128,10 +123,5 @@
 <style>
   section {
     margin: 6px 0;
-  }
-
-  .buttons {
-    display: flex;
-    flex-flow: row;
   }
 </style>

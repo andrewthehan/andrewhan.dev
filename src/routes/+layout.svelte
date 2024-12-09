@@ -36,6 +36,7 @@
   <main>
     <div class="main-content">
       {@render children()}
+      <div class="bottom-gap"></div>
     </div>
   </main>
 </div>
@@ -52,6 +53,7 @@
     display: flex;
     align-items: center;
 
+    margin-top: 6px;
     padding: 12px 0;
     width: 768px;
     max-width: 90vw;
@@ -90,5 +92,9 @@
     max-width: 90vw;
 
     height: 100%;
+  }
+
+  .bottom-gap {
+    min-height: 24px;
   }
 </style>
