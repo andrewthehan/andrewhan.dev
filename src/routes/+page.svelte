@@ -87,9 +87,12 @@
 </script>
 
 <section>
-  Hello! I'm a software engineer with a passion for code design, games, and <a href="/music"
-    >music</a
-  >.
+  Hello! I'm a software engineer with a passion for code design, games, and
+  <a href="/music">music</a>.
+  <br />
+  <br />
+  I'm currently working at
+  <a href="https://www.google.com/" target="_blank" rel="noopener noreferrer">Google</a>.
 </section>
 
 <section>

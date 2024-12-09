@@ -1,4 +1,6 @@
 <script lang="ts">
+  import YoutubeIcon from "virtual:icons/simple-icons/youtube";
+
   const playlists = [
     {
       year: 2020,
@@ -104,7 +106,10 @@
     <h3>{year}</h3>
     <div class="chips">
       {#each playlists.filter((p) => p.year === year) as { quarter, link } (link)}
-        <a href={link} target="_blank" rel="noopener noreferrer" class="chip">Quarter {quarter}</a>
+        <a href={link} target="_blank" rel="noopener noreferrer" class="chip">
+          <YoutubeIcon />
+          <div>Quarter {quarter}</div>
+        </a>
       {/each}
     </div>
   {/each}
@@ -118,6 +123,10 @@
   }
 
   .chip {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
     text-decoration: none;
     padding: 0.5rem;
     border-radius: 0.5rem;
