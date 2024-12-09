@@ -1,46 +1,53 @@
 <script lang="ts">
-  import AtSign from "lucide-svelte/icons/at-sign";
-  import Briefcase from "lucide-svelte/icons/briefcase";
-  import Brush from "lucide-svelte/icons/brush";
-  import CheckCircle from "lucide-svelte/icons/check-circle";
-  import Code from "lucide-svelte/icons/code";
-  import Gamepad from "lucide-svelte/icons/gamepad";
-  import ListMusic from "lucide-svelte/icons/list-music";
-  import Piano from "lucide-svelte/icons/piano";
-  import Twitch from "lucide-svelte/icons/twitch";
-  import "../app.css";
   import Link from "$lib/Link.svelte";
+  import AtSignIcon from "virtual:icons/lucide/at-sign";
+  import BrushIcon from "virtual:icons/lucide/brush";
+  import CircleCheckBigIcon from "virtual:icons/lucide/circle-check-big";
+  import ListMusicIcon from "virtual:icons/lucide/list-music";
+  import PianoIcon from "virtual:icons/lucide/piano";
+  import DiscordIcon from "virtual:icons/simple-icons/discord";
+  import GithubIcon from "virtual:icons/simple-icons/github";
+  import LinkedinIcon from "virtual:icons/simple-icons/linkedin";
+  import SteamIcon from "virtual:icons/simple-icons/steam";
+  import TwitchIcon from "virtual:icons/simple-icons/twitch";
+  import "../app.css";
 
   const socials = [
     {
       name: "Email",
       description: "me@andrewhan.dev",
       link: "mailto:me@andrewhan.dev",
-      icon: AtSign,
+      icon: AtSignIcon,
     },
     {
       name: "LinkedIn",
       description: "andrewthehan",
       link: "https://www.linkedin.com/in/andrewthehan/",
-      icon: Briefcase,
+      icon: LinkedinIcon,
     },
     {
       name: "GitHub",
       description: "andrewthehan",
       link: "https://github.com/andrewthehan",
-      icon: Code,
+      icon: GithubIcon,
+    },
+    {
+      name: "Steam",
+      description: "hooroorook",
+      link: "https://steamcommunity.com/id/hooroorook/",
+      icon: SteamIcon,
     },
     {
       name: "Twitch",
       description: "hooroorook",
       link: "https://www.twitch.tv/hooroorook",
-      icon: Twitch,
+      icon: TwitchIcon,
     },
     {
-      name: "Steam",
+      name: "Discord",
       description: ". . .",
       alertMessage: "Ask me directly.",
-      icon: Gamepad,
+      icon: DiscordIcon,
     },
   ];
 
@@ -49,25 +56,25 @@
       name: "Check",
       description: "A minimal checklist app",
       link: "https://check.andrewhan.dev/",
-      icon: CheckCircle,
+      icon: CircleCheckBigIcon,
     },
     {
       name: "Piano",
       description: "A MIDI pianola",
       link: "https://piano.andrewhan.dev/",
-      icon: Piano,
+      icon: PianoIcon,
     },
     {
       name: "Butterfly",
       description: "An artwork utilizing regular polygons",
       link: "https://github.com/andrewthehan/butterfly",
-      icon: Brush,
+      icon: BrushIcon,
     },
     {
       name: "Transcriptions",
       description: "Some piano transcriptions",
       link: "https://transcriptions.andrewhan.dev/",
-      icon: ListMusic,
+      icon: ListMusicIcon,
     },
   ];
 </script>
