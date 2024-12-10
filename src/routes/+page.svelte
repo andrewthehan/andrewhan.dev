@@ -1,99 +1,30 @@
 <script lang="ts">
-  import Link from "$lib/Link.svelte";
-  import AtSignIcon from "virtual:icons/lucide/at-sign";
-  import BrushIcon from "virtual:icons/lucide/brush";
-  import CircleCheckBigIcon from "virtual:icons/lucide/circle-check-big";
-  import ListMusicIcon from "virtual:icons/lucide/list-music";
-  import PianoIcon from "virtual:icons/lucide/piano";
-  import DiscordIcon from "virtual:icons/simple-icons/discord";
-  import GithubIcon from "virtual:icons/simple-icons/github";
-  import KofiIcon from "virtual:icons/simple-icons/kofi";
-  import LinkedinIcon from "virtual:icons/simple-icons/linkedin";
-  import SteamIcon from "virtual:icons/simple-icons/steam";
-  import TwitchIcon from "virtual:icons/simple-icons/twitch";
+  import { goto } from "$app/navigation";
+  import Link from "$lib/components/Link.svelte";
+  import SequenceListener from "$lib/game/components/SequenceListener.svelte";
+  import { projects } from "$lib/data/projects";
+  import { socials } from "$lib/data/socials";
   import "../app.css";
-
-  const socials = [
-    {
-      name: "Email",
-      description: "me@andrewhan.dev",
-      link: "mailto:me@andrewhan.dev",
-      icon: AtSignIcon,
-    },
-    {
-      name: "LinkedIn",
-      description: "andrewthehan",
-      link: "https://www.linkedin.com/in/andrewthehan/",
-      icon: LinkedinIcon,
-    },
-    {
-      name: "GitHub",
-      description: "andrewthehan",
-      link: "https://github.com/andrewthehan",
-      icon: GithubIcon,
-    },
-    {
-      name: "Ko-fi",
-      description: "andrewthehan",
-      link: "https://ko-fi.com/andrewthehan",
-      icon: KofiIcon,
-    },
-    {
-      name: "Steam",
-      description: "hooroorook",
-      link: "https://steamcommunity.com/id/hooroorook/",
-      icon: SteamIcon,
-    },
-    {
-      name: "Twitch",
-      description: "hooroorook",
-      link: "https://www.twitch.tv/hooroorook",
-      icon: TwitchIcon,
-    },
-    {
-      name: "Discord",
-      description: ". . .",
-      alertMessage: "Ask me directly.",
-      icon: DiscordIcon,
-    },
-  ];
-
-  const projects = [
-    {
-      name: "Check",
-      description: "A minimal checklist app",
-      link: "https://check.andrewhan.dev/",
-      icon: CircleCheckBigIcon,
-    },
-    {
-      name: "Piano",
-      description: "A MIDI pianola",
-      link: "https://piano.andrewhan.dev/",
-      icon: PianoIcon,
-    },
-    {
-      name: "Butterfly",
-      description: "An artwork utilizing regular polygons",
-      link: "https://github.com/andrewthehan/butterfly",
-      icon: BrushIcon,
-    },
-    {
-      name: "Transcriptions",
-      description: "Some piano transcriptions",
-      link: "https://transcriptions.andrewhan.dev/",
-      icon: ListMusicIcon,
-    },
-  ];
+  import { Achievement, addAchievement } from "$lib/game/achievements";
 </script>
 
-<section>
-  Hello! I'm a software engineer with a passion for code design, games, and
-  <a href="/music">music</a>.
-  <br />
-  <br />
-  I'm currently working at
-  <a href="https://www.google.com/" target="_blank" rel="noopener noreferrer">Google</a>.
-</section>
+<SequenceListener
+  sequence={[..."hello"]}
+  onTrigger={() => {
+    addAchievement(Achievement.HELLO);
+    goto("/400");
+  }}
+/>
+<pre>Typing code is what I do,
+Yet I love to play piano too.
+Playing games, both digital and board,
+Eating yummy food, I can't afford.
+
+Hello, I'm just a normal guy,
+Enjoying life, it's no lie!
+Living here in the Bay Area,
+Loving to ski, it's fair to say,
+On the weekend, I'm carefree, hooray!</pre>
 
 <section>
   <h2>Socials</h2>

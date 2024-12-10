@@ -1,8 +1,11 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
   import "../app.css";
+  import { afterNavigate } from "$app/navigation";
 
   export let children: Snippet;
+
+  console.log("You can look around 👀.");
 </script>
 
 <svelte:head>

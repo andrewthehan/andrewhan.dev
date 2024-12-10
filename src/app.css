@@ -1,6 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=New+Rocker&display=swap');
 
 :root {
+  --normal-font: 'Montserrat', sans-serif;
+  --game-font: 'New Rocker', cursive;
+
   --background-color: #14161e;
   --foreground-color: mintcream;
 
@@ -9,13 +12,13 @@
 
 * {
   /* outline: 1px solid red; */
-  font-family: "Montserrat", sans-serif;
 }
 
 body {
   margin: 0;
   background: var(--background-color);
   color: var(--foreground-color);
+  font-family: var(--normal-font);
 }
 
 a {
@@ -28,4 +31,14 @@ a:hover {
 
 hr {
   border-color: var(--background-color);
+}
+
+::-webkit-scrollbar {
+  background: transparent;
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: white;
+  border: 1px solid;
 }
