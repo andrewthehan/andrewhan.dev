@@ -25,10 +25,6 @@
       health = currentHealth - 1;
       setNumber(GameKey.GOBLIN_HEALTH, currentHealth - 1);
     }
-
-    if (health === 0) {
-      alert("You defeated the goblin!");
-    }
   }
 </script>
 
@@ -39,11 +35,13 @@
       ? "a rock"
       : `${count} rocks`}.
 </GameText>
-{#each Array.from({ length: health }, (_, i) => i) as _}
-  <HeartsIcon font-size={24} color="red" />
-{/each}
+<div>
+  {#each Array.from({ length: health }, (_, i) => i) as _}
+    <HeartsIcon font-size={24} color="red" />
+  {/each}
+</div>
 {#if health === 0}
-  <GameText element="p">The goblin is dead!</GameText>
+  <GameText element="p">You defeated the goblin!</GameText>
   <GameButton onClick={() => goto("/402")}>
     <DeadHeadIcon font-size={128} color="darkolivegreen" />
   </GameButton>

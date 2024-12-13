@@ -26,7 +26,7 @@
       goto("/401");
     }}
   >
-    <RockIcon font-size={48} color="slategray" />
+    <RockIcon font-size={64} color="slategray" />
   </GameButton>
 </div>
 
