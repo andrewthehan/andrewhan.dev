@@ -2,9 +2,9 @@
   import GameText from "$lib/game/components/GameText.svelte";
 </script>
 
-<GameText>Close.</GameText>
-<GameText>Maybe there's another version of this page you can try instead.</GameText>
-<GameText>The answer will be hiding so you'll need to ask it to</GameText>
+<GameText element="p">You're on the right track.</GameText>
+<GameText element="p">Maybe there's another version of this page you can try instead.</GameText>
+<GameText element="p">The answer will be hiding so you'll need to ask it to</GameText>
 <pre>
 R
 E
@@ -13,4 +13,4 @@ E
 A
 L
 </pre>
-<GameText>itself once you find the right place.</GameText>
+<GameText element="p">itself once you find the right place.</GameText>

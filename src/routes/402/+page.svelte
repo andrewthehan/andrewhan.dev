@@ -2,5 +2,4 @@
   import GameText from "$lib/game/components/GameText.svelte";
 </script>
 
-<GameText>You found another one!</GameText>
-<GameText>But I didn't hide anymore... sorry.</GameText>
+<GameText element="p">Hmm... where to go now..?</GameText>

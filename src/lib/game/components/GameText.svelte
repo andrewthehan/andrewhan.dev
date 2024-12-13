@@ -2,16 +2,16 @@
   import type { Snippet } from "svelte";
 
   export let children: Snippet<[]>;
-  export let fontSize: number = 36;
+  export let element: string = "div";
 </script>
 
-<div class="game-text" style:font-size={`${fontSize}px`}>
+<svelte:element this={element} class="game-text">
   {@render children()}
-</div>
+</svelte:element>
 
 <style>
   .game-text {
-    margin: 1.1rem 0;
     font-family: var(--game-font);
+    font-size: var(--font-size, 24px);
   }
 </style>

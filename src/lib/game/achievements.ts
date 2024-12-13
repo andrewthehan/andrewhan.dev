@@ -1,4 +1,9 @@
-const LOCAL_STORAGE_KEY = "achievements";
+import { GameKey, getJson, setJson } from "./storage";
+import BugleCallIcon from "virtual:icons/game-icons/bugle-call";
+import StonePileIcon from "virtual:icons/game-icons/stone-pile";
+import ShinyPurseIcon from "virtual:icons/game-icons/shiny-purse";
+import BoxTrapIcon from "virtual:icons/game-icons/box-trap";
+import MagickTrickIcon from "virtual:icons/game-icons/magick-trick";
 
 function fixed(achievements: Achievement[]): Achievement[] {
   return Array.from(
@@ -11,15 +16,14 @@ function fixed(achievements: Achievement[]): Achievement[] {
 }
 
 function setAchievements(achievements: Achievement[]) {
-  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(fixed(achievements)));
+  setJson(GameKey.ACHIEVEMENTS, fixed(achievements));
 }
 
 export function getAchievements(): Achievement[] {
-  const value = localStorage.getItem(LOCAL_STORAGE_KEY);
-  const achievements = value == null ? [] : JSON.parse(value);
+  const achievements = getJson(GameKey.ACHIEVEMENTS, []);
   const validated = fixed(achievements);
   if (validated.length !== achievements.length) {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(validated));
+    setJson(GameKey.ACHIEVEMENTS, validated);
   }
   return validated;
 }
@@ -31,6 +35,49 @@ export function addAchievement(achievement: Achievement) {
 
 export enum Achievement {
   HELLO = "HELLO",
+  ROCK_COLLECTOR = "ROCK_COLLECTOR",
   TREASURE_HUNTER = "TREASURE",
-  DIED_TO_MIMIC = "DIED_TO_MIMIC",
+  DIED_TO_A_MIMIC = "DIED_TO_A_MIMIC",
+  MAGICIAN = "MAGICIAN",
+}
+
+export type AchievementData = {
+  name: string;
+  description: string;
+  icon: any;
+};
+
+export function getAchievementData(achievement: Achievement): AchievementData {
+  switch (achievement) {
+    case Achievement.HELLO:
+      return {
+        name: "Hello",
+        description: "You stumbled upon a hidden adventure.",
+        icon: BugleCallIcon,
+      };
+    case Achievement.ROCK_COLLECTOR:
+      return {
+        name: "Rock Collector",
+        description: "How many rocks do you need..?",
+        icon: StonePileIcon,
+      };
+    case Achievement.TREASURE_HUNTER:
+      return {
+        name: "Treasure Hunter",
+        description: "You obtained the legendary treasure.",
+        icon: ShinyPurseIcon,
+      };
+    case Achievement.DIED_TO_A_MIMIC:
+      return {
+        name: "Died to a mimic",
+        description: "There are no grimoires in here.",
+        icon: BoxTrapIcon,
+      };
+    case Achievement.MAGICIAN:
+      return {
+        name: "Magician",
+        description: "Even Teller would be impressed.",
+        icon: MagickTrickIcon,
+      };
+  }
 }

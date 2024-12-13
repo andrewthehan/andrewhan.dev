@@ -1,11 +1,26 @@
 <script lang="ts">
+  import { Achievement, addAchievement } from "$lib/game/achievements";
   import type { Snippet } from "svelte";
   import "../app.css";
-  import { afterNavigate } from "$app/navigation";
 
   export let children: Snippet;
 
-  console.log("You can look around 👀.");
+  (window as any).abracadabra = () => {
+    addAchievement(Achievement.MAGICIAN);
+    console.log(`✨ Fraq na rznvy gb zr@naqerjuna.qri vs lbh'er univat sha! ✨`);
+  };
+
+  (window as any).alakazam = () => {
+    addAchievement(Achievement.MAGICIAN);
+    console.log(`✨ Gung'f n Cbxrzba. ✨`);
+  };
+
+  (window as any).hocuspocus = () => {
+    addAchievement(Achievement.MAGICIAN);
+    console.log(`✨ GBQB: gb or pbagvahrq... ✨`);
+  };
+
+  console.log("👀 You can look around but visiting the Sources tab may spoil the fun.");
 </script>
 
 <svelte:head>
@@ -90,6 +105,7 @@
   .main-content {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
 
     width: 768px;
     max-width: 90vw;

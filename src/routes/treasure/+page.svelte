@@ -8,10 +8,29 @@
 
 <OpenTreasureChestIcon font-size={100} color="goldenrod" />
 
-<GameText>You found treasure!</GameText>
+<GameText element="p">You found some sort of scroll!</GameText>
 
-<GameText>It's a command spell. It says:</GameText>
+<div class="spell-book">
+  <div>✨ Spells ✨</div>
+  <div>
+    <div>abracadabra()</div>
+    <div>alakazam()</div>
+    <div>hocuspocus()</div>
+  </div>
+  <div>- ROT13</div>
+</div>
 
-<pre>hocuspocus()</pre>
+<GameText element="p">Seems to be a list of spells. Now, how to cast these..?</GameText>
 
-<GameText>Wonder what it does?</GameText>
+<style>
+  .spell-book {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    gap: 8px;
+
+    outline: 1px solid var(--foreground-color);
+    padding: 16px;
+    font-family: monospace;
+  }
+</style>

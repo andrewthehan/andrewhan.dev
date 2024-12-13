@@ -11,6 +11,7 @@
 
 <style>
   .content {
+    width: 100%;
     flex: 1;
     display: flex;
     flex-flow: column;

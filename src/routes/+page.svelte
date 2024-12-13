@@ -57,5 +57,6 @@ On the weekend, I'm carefree, hooray!</pre>
 <style>
   section {
     margin: 6px 0;
+    align-self: stretch;
   }
 </style>
