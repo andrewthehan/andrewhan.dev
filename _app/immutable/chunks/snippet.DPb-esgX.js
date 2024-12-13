@@ -1,0 +1,1 @@
+import{b as i,E as o,i as f,V as p,B as c,h,k as d}from"./runtime.DkP24cSa.js";function _(e,n,...t){var s=e,r=p,a;i(()=>{r!==(r=n())&&(a&&(c(a),a=null),a=f(()=>r(s,...t)))},o),h&&(s=d)}export{_ as s};
