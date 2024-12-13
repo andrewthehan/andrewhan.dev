@@ -20,7 +20,7 @@
   <div>- ROT13</div>
 </div>
 
-<GameText element="p">Seems to be a list of spells. Now, how to cast these..?</GameText>
+<GameText element="p">Seems to contain a list of spells. Now, how to cast these..?</GameText>
 
 <style>
   .spell-book {

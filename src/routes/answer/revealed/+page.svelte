@@ -18,7 +18,6 @@
   }
 </script>
 
-<GameText element="p">Wow! That was a tricky one.</GameText>
 <GameText element="p">Seems like you're pretty invested.</GameText>
 <GameText element="p">Here, take this box.</GameText>
 {#if hasKey}
