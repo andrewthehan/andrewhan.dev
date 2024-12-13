@@ -18,13 +18,16 @@
     }
 
     const currentCount = getNumber(GameKey.ROCK_COUNT, 0);
-    if (currentCount > 0) {
-      count = currentCount - 1;
-      setNumber(GameKey.ROCK_COUNT, currentCount - 1);
-
-      health = currentHealth - 1;
-      setNumber(GameKey.GOBLIN_HEALTH, currentHealth - 1);
+    if (currentCount === 0) {
+      alert("You have no rocks!");
+      return;
     }
+
+    count = currentCount - 1;
+    setNumber(GameKey.ROCK_COUNT, currentCount - 1);
+
+    health = currentHealth - 1;
+    setNumber(GameKey.GOBLIN_HEALTH, currentHealth - 1);
   }
 </script>
 
