@@ -4,6 +4,8 @@ import StonePileIcon from "virtual:icons/game-icons/stone-pile";
 import ShinyPurseIcon from "virtual:icons/game-icons/shiny-purse";
 import BoxTrapIcon from "virtual:icons/game-icons/box-trap";
 import MagickTrickIcon from "virtual:icons/game-icons/magick-trick";
+import { toast } from "@zerodevx/svelte-toast";
+import AchievementCard from "./components/AchievementCard.svelte";
 
 function fixed(achievements: Achievement[]): Achievement[] {
   return Array.from(
@@ -30,6 +32,25 @@ export function getAchievements(): Achievement[] {
 
 export function addAchievement(achievement: Achievement) {
   const achievements = getAchievements();
+  if (achievements.includes(achievement)) {
+    return;
+  }
+
+  toast.push({
+    component: {
+      src: AchievementCard,
+      props: {
+        achievement,
+      },
+    },
+    dismissable: true,
+    initial: 0,
+    theme: {
+      "--toastBackground": "var(--background-color)",
+      "--toastBorder": "1px solid var(--foreground-color)",
+      "--toastWidth": "400px",
+    },
+  });
   setAchievements([...achievements, achievement]);
 }
 

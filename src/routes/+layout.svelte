@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Achievement, addAchievement } from "$lib/game/achievements";
+  import { SvelteToast } from "@zerodevx/svelte-toast";
   import type { Snippet } from "svelte";
   import "../app.css";
 
@@ -37,6 +38,7 @@
   />
 </svelte:head>
 
+<SvelteToast />
 <div class="app">
   <header>
     <a href="/" class="home">
