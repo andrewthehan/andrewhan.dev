@@ -17,7 +17,6 @@
     <div>alakazam()</div>
     <div>hocuspocus()</div>
   </div>
-  <div>- ROT13</div>
 </div>
 
 <GameText element="p">Seems to contain a list of spells. Now, how to cast these..?</GameText>

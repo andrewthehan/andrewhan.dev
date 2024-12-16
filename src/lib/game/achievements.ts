@@ -1,11 +1,13 @@
-import { GameKey, getJson, setJson } from "./storage";
-import BugleCallIcon from "virtual:icons/game-icons/bugle-call";
-import StonePileIcon from "virtual:icons/game-icons/stone-pile";
-import ShinyPurseIcon from "virtual:icons/game-icons/shiny-purse";
-import BoxTrapIcon from "virtual:icons/game-icons/box-trap";
-import MagickTrickIcon from "virtual:icons/game-icons/magick-trick";
 import { toast } from "@zerodevx/svelte-toast";
+import BoxTrapIcon from "virtual:icons/game-icons/box-trap";
+import BugleCallIcon from "virtual:icons/game-icons/bugle-call";
+import CowIcon from "virtual:icons/game-icons/cow";
+import MagickTrickIcon from "virtual:icons/game-icons/magick-trick";
+import ShinyPurseIcon from "virtual:icons/game-icons/shiny-purse";
+import StonePileIcon from "virtual:icons/game-icons/stone-pile";
+import TrashCanIcon from "virtual:icons/game-icons/trash-can";
 import AchievementCard from "./components/AchievementCard.svelte";
+import { GameKey, getJson, setJson } from "./storage";
 
 function fixed(achievements: Achievement[]): Achievement[] {
   return Array.from(
@@ -57,9 +59,11 @@ export function addAchievement(achievement: Achievement) {
 export enum Achievement {
   HELLO = "HELLO",
   ROCK_COLLECTOR = "ROCK_COLLECTOR",
+  HOARDER = "HOARDER",
   TREASURE_HUNTER = "TREASURE",
   DIED_TO_A_MIMIC = "DIED_TO_A_MIMIC",
   MAGICIAN = "MAGICIAN",
+  DABBED_BEEEEF = "DABBED_BEEEEF",
 }
 
 export type AchievementData = {
@@ -82,10 +86,16 @@ export function getAchievementData(achievement: Achievement): AchievementData {
         description: "How many rocks do you need..?",
         icon: StonePileIcon,
       };
+    case Achievement.HOARDER:
+      return {
+        name: "Hoarder",
+        description: "You don't need it.",
+        icon: TrashCanIcon,
+      };
     case Achievement.TREASURE_HUNTER:
       return {
         name: "Treasure Hunter",
-        description: "You obtained the legendary treasure.",
+        description: "You obtained the legendary paper.",
         icon: ShinyPurseIcon,
       };
     case Achievement.DIED_TO_A_MIMIC:
@@ -99,6 +109,12 @@ export function getAchievementData(achievement: Achievement): AchievementData {
         name: "Magician",
         description: "Even Teller would be impressed.",
         icon: MagickTrickIcon,
+      };
+    case Achievement.DABBED_BEEEEF:
+      return {
+        name: "#DABBED #BEEEEF",
+        description: "You've been blessed by the cow.",
+        icon: CowIcon,
       };
   }
 }

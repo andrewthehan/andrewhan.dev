@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { Achievement, addAchievement } from "$lib/game/achievements";
   import GameButton from "$lib/game/components/GameButton.svelte";
   import GameText from "$lib/game/components/GameText.svelte";
   import { GameKey, getJson, setJson } from "$lib/game/storage";
@@ -10,7 +11,8 @@
 
   function getKey() {
     if (hasKey) {
-      alert("The box is empty. No need to keep looking.");
+      addAchievement(Achievement.HOARDER);
+      alert("No need to take the empty box with you.");
       return;
     }
     setJson(GameKey.CHEST_KEY, "/treasure");

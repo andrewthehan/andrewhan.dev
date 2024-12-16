@@ -3,22 +3,23 @@
   import { SvelteToast } from "@zerodevx/svelte-toast";
   import type { Snippet } from "svelte";
   import "../app.css";
+  import { goto } from "$app/navigation";
 
   export let children: Snippet;
 
   (window as any).abracadabra = () => {
     addAchievement(Achievement.MAGICIAN);
-    console.log(`✨ Fraq na rznvy gb zr@naqerjuna.qri vs lbh'er univat sha! ✨`);
+    alert(`✨ Send an email to me@andrewhan.dev if you're having fun! ✨`);
   };
 
   (window as any).alakazam = () => {
     addAchievement(Achievement.MAGICIAN);
-    console.log(`✨ Gung'f n Cbxrzba. ✨`);
+    alert(`✨ That's a Pokémon. ✨`);
   };
 
   (window as any).hocuspocus = () => {
     addAchievement(Achievement.MAGICIAN);
-    console.log(`✨ GBQB: gb or pbagvahrq... ✨`);
+    goto("/squares");
   };
 
   console.log("👀 You can look around but visiting the Sources tab may spoil the fun.");

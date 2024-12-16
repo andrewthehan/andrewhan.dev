@@ -10,15 +10,15 @@
   <GameText --font-size="40px"
     >Achievements ({achievements.length} / {Object.values(Achievement).length})</GameText
   >
-  {#if achievements.length === 0}
-    <GameText element="p">No achievements yet.</GameText>
-  {:else}
-    <div class="achievements">
-      {#each achievements as achievement (achievement)}
+  <div class="achievements">
+    {#each Object.values(Achievement) as achievement (achievement)}
+      {#if achievements.includes(achievement)}
         <AchievementCard {achievement} />
-      {/each}
-    </div>
-  {/if}
+      {:else}
+        <AchievementCard {achievement} locked />
+      {/if}
+    {/each}
+  </div>
 </section>
 
 <style>
