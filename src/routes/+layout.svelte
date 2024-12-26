@@ -35,7 +35,7 @@
   <meta property="og:description" content="Andrew Han's personal site" />
   <meta
     property="og:image"
-    content="https://raw.githubusercontent.com/andrewthehan/butterfly/master/butterfly.png"
+    content="https://raw.githubusercontent.com/andrewthehan/butterfly/master/static/butterfly-light.png"
   />
 </svelte:head>
 
@@ -45,7 +45,7 @@
     <a href="/" class="home">
       <img
         class="logo"
-        src="https://raw.githubusercontent.com/andrewthehan/butterfly/master/butterfly.png"
+        src="https://raw.githubusercontent.com/andrewthehan/butterfly/master/static/butterfly-light.png"
         alt="Andrew Han"
         width="32"
         height="32"
