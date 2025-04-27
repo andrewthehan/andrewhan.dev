@@ -10,13 +10,11 @@
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "format": "prettier --write .",
     "lint": "prettier --check . && eslint .",
-    "deploy": "npm run build && npx gh-pages -d build --cname andrewhan.dev -t true"
+    "deploy": "npm run build && npx gh-pages -d build --cname andrewhan.dev -t true --nojekyll"
   },
   "devDependencies": {
     "@eslint/compat": "^1.2.3",
-    "@iconify-json/game-icons": "^1.2.0",
-    "@iconify-json/lucide": "^1.2.18",
-    "@iconify-json/simple-icons": "^1.2.15",
+    "@iconify/json": "^2.2.321",
     "@iconify/svelte": "^4.1.0",
     "@sveltejs/adapter-static": "^3.0.6",
     "@sveltejs/kit": "^2.9.0",

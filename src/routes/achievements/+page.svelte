@@ -22,8 +22,14 @@
 </section>
 
 <style>
+  section {
+    width: 100%;
+  }
+
   .achievements {
+    width: 100%;
     display: flex;
     flex-direction: column;
+    gap: 5px;
   }
 </style>

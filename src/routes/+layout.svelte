@@ -40,83 +40,37 @@
 </svelte:head>
 
 <SvelteToast />
-<div class="app">
-  <header>
-    <a href="/" class="home">
-      <img
-        class="logo"
-        src="https://raw.githubusercontent.com/andrewthehan/butterfly/master/static/butterfly-light.png"
-        alt="Andrew Han"
-        width="32"
-        height="32"
-      />
-      <h1 class="name">Andrew Han</h1>
-    </a>
-  </header>
-
-  <main>
-    <div class="main-content">
-      {@render children()}
-      <div class="bottom-gap"></div>
-    </div>
-  </main>
-</div>
+<main>
+  <div class="background"></div>
+  <div class="content">
+    {@render children()}
+  </div>
+</main>
 
 <style>
-  .app {
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    height: 100vh;
-  }
-
-  header {
-    display: flex;
-    align-items: center;
-
-    margin-top: 6px;
-    padding: 12px 0;
-    width: 768px;
-    max-width: 90vw;
-  }
-
-  .home {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-  }
-
-  .logo {
-    border-radius: 50%;
-  }
-
-  .name {
-    margin: 0 1rem;
-  }
-
   main {
-    width: 100%;
-    flex: 1;
-
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    overflow-y: auto;
   }
 
-  .main-content {
+  .content {
+    width: 940px;
+    max-width: calc(100vw - 4%);
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-
-    width: 768px;
-    max-width: 90vw;
-
-    height: 100%;
+    align-items: center;
   }
 
-  .bottom-gap {
-    min-height: 24px;
+  .background {
+    z-index: -1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    filter: opacity(0.1) brightness(0.5) grayscale(0.8);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("https://raw.githubusercontent.com/andrewthehan/butterfly/master/static/butterfly-light.png");
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
   }
 </style>
