@@ -50,7 +50,6 @@
     grid-area: 1 / 1;
     width: 100%;
     object-fit: cover;
-    aspect-ratio: 5/3;
   }
 
   .project-separator {

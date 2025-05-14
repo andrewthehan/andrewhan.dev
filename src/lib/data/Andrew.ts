@@ -1,4 +1,5 @@
 import checkImage from "$lib/res/check.png";
+import friendleImage from "$lib/res/friendle.png";
 import pianolaImage from "$lib/res/pianola.png";
 import splatrisImage from "$lib/res/splatris.png";
 import AtSignIcon from "~icons/lucide/at-sign";
@@ -45,6 +46,12 @@ export const ANDREW: Human = {
   ],
   tags: ["Korean", "Gamer", "Musician", "Water", "Noodles", "Ski", "Crochet"],
   projects: [
+    {
+      name: "Friendle",
+      description: "Wordle with Friends",
+      link: "https://friendle.gg/",
+      image: friendleImage,
+    },
     {
       name: "Splatris",
       description: "Fast-paced, colorful, block-dropping area control",
