@@ -52,6 +52,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: auto;
+    scrollbar-gutter: stable;
   }
 
   .content {
@@ -66,7 +68,7 @@
     z-index: -1;
     position: absolute;
     width: 100%;
-    height: 100%;
+    height: 50%;
     filter: opacity(0.1) brightness(0.5) grayscale(0.8);
     background-repeat: no-repeat;
     background-size: cover;

@@ -1,0 +1,54 @@
+export type Human = {
+  name: string;
+  crumbs: Crumb[];
+  summaryImage: string;
+  summaryDescription: string;
+  propertyGroups: PropertyGroup[];
+  tags: string[];
+  projects: Project[];
+  quickActions: QuickAction[];
+  ctas: Cta[];
+  socials: Social[];
+  descriptionComponent: any;
+};
+
+type Crumb = {
+  name: string;
+  alert: string;
+};
+
+type Property = {
+  name: string;
+  value: string;
+  link?: string;
+};
+
+type PropertyGroup = Property[];
+
+type Project = {
+  name: string;
+  description: string;
+  image: string;
+  link: string;
+};
+
+type QuickAction = {
+  text: string;
+  link: string;
+};
+
+type Cta = {
+  title: string;
+  description: string;
+  button: string;
+  cost: number;
+  link: string;
+};
+
+type Social = {
+  name: string;
+  description: string;
+  icon: any;
+  link?: string;
+  alertMessage?: string;
+};

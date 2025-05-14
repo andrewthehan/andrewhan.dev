@@ -1,107 +1,60 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
-  import AnimatedText from "$lib/components/AnimatedText.svelte";
   import { Achievement, addAchievement } from "$lib/game/achievements";
   import SequenceListener from "$lib/game/components/SequenceListener.svelte";
-  import checkImage from "$lib/res/check.png";
-  import pianolaImage from "$lib/res/pianola.png";
-  import splatrisImage from "$lib/res/splatris.png";
   import { fade } from "svelte/transition";
   import "../app.css";
+  import { ANDREW } from "$lib/data/Andrew";
+  import { onMount } from "svelte";
+  import { scrollIntoViewHorizontally } from "$lib/utils/htmlUtils";
 
-  type Property = {
-    name: string;
-    value: string;
-    link?: string;
-  };
+  const human = $state(ANDREW);
 
-  type PropertyGroup = Property[];
-
-  type PropertyGroups = PropertyGroup[];
-
-  const crumbs = $state([
-    { name: "All", alert: "There are too many things here." },
-    { name: "Humans", alert: "This is the only human you need." },
-    { name: "Andrew Han", alert: "Hi. You're already here." },
-  ]);
-
-  const description = $state(
-    "I'm a software engineer who enjoys balancing logic with creativity. Off the clock, you'll find me playing piano, listening to music, engaging in board or video games, and always appreciating good food.",
-  );
-
-  const summaryPropertyGroups = $state<PropertyGroups>([
-    [
-      {
-        name: "all reviews",
-        value: "Overwhelmingly Positive",
-        link: "https://en.wikipedia.org/wiki/Positive",
-      },
-    ],
-    [
-      { name: "release date", value: "February 4" },
-      { name: "title", value: "Software Engineer" },
-    ],
-    [
-      { name: "employer", value: "Google", link: "https://www.google.com/" },
-      {
-        name: "location",
-        value: "Bay Area",
-        link: "https://www.google.com/maps/place/San+Francisco+Bay+Area,+CA",
-      },
-    ],
-  ]);
-
-  const tags = $state(["Korean", "Code Design", "Gamer", "Musician", "Water", "Noodles", "Ski"]);
-
-  const mediaImages = $state([
-    splatrisImage,
-    checkImage,
-    pianolaImage,
-    "https://raw.githubusercontent.com/andrewthehan/butterfly/master/static/butterfly-light.png",
-    "https://raw.githubusercontent.com/andrewthehan/butterfly/master/static/butterfly-light.png",
-    "https://raw.githubusercontent.com/andrewthehan/butterfly/master/static/butterfly-light.png",
-    "https://raw.githubusercontent.com/andrewthehan/butterfly/master/static/butterfly-light.png",
-  ]);
   let currentImageIndex = $state(0);
+  let rotationTimeoutId = $state<ReturnType<typeof setTimeout> | null>(null);
+  const rotationDelay = 5000;
 
-  const quickActions = $state([
-    {
-      text: "Resume",
-      onClick: () => {
-        alert("TODO: resume");
-      },
-    },
-    {
-      text: "Contact",
-      onClick: () => {
-        alert("TODO: contact");
-      },
-    },
-  ]);
+  function startRotationTimer() {
+    if (rotationTimeoutId) {
+      clearTimeout(rotationTimeoutId);
+    }
 
-  const ctas = $state([
-    {
-      title: "Say hello",
-      description: "Send an email to me@andrewhan.dev",
-      button: "Email",
-      cost: 0,
-      link: "mailto:me@andrewhan.dev",
-    },
-    {
-      title: "Recruit",
-      description: "I'm not really looking though...",
-      button: "LinkedIn",
-      cost: 0,
-      link: "https://www.linkedin.com/in/andrewthehan/",
-    },
-    {
-      title: "Buy me a water",
-      description: "I don't drink coffee",
-      button: "Ko-fi",
-      cost: 2,
-      link: "https://ko-fi.com/andrewthehan",
-    },
-  ]);
+    rotationTimeoutId = setTimeout(() => {
+      setCurrentImageIndex((currentImageIndex + 1) % human.projects.length);
+    }, rotationDelay);
+  }
+
+  function setCurrentImageIndex(index: number) {
+    currentImageIndex = index;
+    const currentImage = document.querySelector(
+      `.media-preview:nth-child(${index + 1})`,
+    ) as HTMLElement;
+    scrollIntoViewHorizontally(currentImage, currentImage.parentElement!, {
+      behavior: "smooth",
+      inline: "nearest",
+    });
+    startRotationTimer();
+  }
+
+  onMount(() => {
+    startRotationTimer();
+    return () => {
+      if (rotationTimeoutId) clearTimeout(rotationTimeoutId);
+    };
+  });
+
+  let hue = $state(parseInt(getComputedStyle(document.body).getPropertyValue("--primary-hue")));
+
+  let animationFrameId = $state<ReturnType<typeof requestAnimationFrame> | null>(null);
+  let lastTimestamp = $state(0);
+  function cycle(timestamp: number) {
+    const deltaTime = timestamp - lastTimestamp;
+    hue = (hue + 0.1 * deltaTime) % 360;
+    document.documentElement.style.setProperty("--primary-hue", `${hue}`);
+
+    lastTimestamp = timestamp;
+    animationFrameId = requestAnimationFrame(cycle);
+  }
 </script>
 
 <SequenceListener
@@ -112,9 +65,33 @@
   }}
 />
 
+<SequenceListener
+  sequence={[
+    "ArrowUp",
+    "ArrowUp",
+    "ArrowDown",
+    "ArrowDown",
+    "ArrowLeft",
+    "ArrowRight",
+    "ArrowLeft",
+    "ArrowRight",
+    "b",
+    "a",
+  ]}
+  onTrigger={() => {
+    if (animationFrameId) {
+      cancelAnimationFrame(animationFrameId);
+      animationFrameId = null;
+    } else {
+      lastTimestamp = performance.now();
+      animationFrameId = requestAnimationFrame(cycle);
+    }
+  }}
+/>
+
 <div class="header">
   <div class="breadcrumbs">
-    {#each crumbs as crumb, i}
+    {#each human.crumbs as crumb, i}
       {#if i > 0}
         <div>&gt;</div>
       {/if}
@@ -123,7 +100,7 @@
       </a>
     {/each}
   </div>
-  <h1 class="title">Andrew Han</h1>
+  <h1 class="title">{human.name}</h1>
 </div>
 <div class="hero">
   <div class="media">
@@ -132,35 +109,39 @@
         <img
           transition:fade
           class="main-media"
-          src={mediaImages[currentImageIndex]}
-          alt="Andrew Han"
+          src={human.projects[currentImageIndex].image}
+          alt={human.name}
+        />
+      {/key}
+      {#key currentImageIndex}
+        <img
+          transition:fade
+          class="main-media"
+          src={human.projects[currentImageIndex].image}
+          alt={human.name}
         />
       {/key}
     </div>
     <div class="carousel">
-      {#each mediaImages as mediaImage, i}
+      {#each human.projects as project, i}
         <button
           class="media-preview"
           class:selected={i === currentImageIndex}
-          onclick={(e) => (currentImageIndex = i)}
+          onclick={(e) => setCurrentImageIndex(i)}
         >
-          <img src={mediaImage} alt="Andrew Han" />
+          <img src={project.image} alt={human.name} />
         </button>
       {/each}
     </div>
   </div>
   <div class="summary">
-    <img
-      class="summary-image"
-      src="https://raw.githubusercontent.com/andrewthehan/butterfly/master/static/butterfly-light.png"
-      alt="Andrew Han"
-    />
+    <img class="summary-image" src={human.summaryImage} alt={human.name} />
     <div class="summary-contents">
       <div class="summary-description">
-        {description}
+        {human.summaryDescription}
       </div>
       <div class="summary-property-groups">
-        {#each summaryPropertyGroups as propertyGroup}
+        {#each human.propertyGroups as propertyGroup}
           <div class="summary-property-group">
             {#each propertyGroup as property}
               <div class="property">
@@ -186,7 +167,7 @@
       </div>
       <div class="tag-header">Popular user-defined tags for this product:</div>
       <div class="tags">
-        {#each tags as tag}
+        {#each human.tags as tag}
           <div class="tag">{tag}</div>
         {/each}
       </div>
@@ -194,16 +175,16 @@
   </div>
 </div>
 <div class="quick-actions">
-  {#each quickActions as action}
-    <button class="quick-action" onclick={action.onClick}>
+  {#each human.quickActions as action}
+    <a class="quick-action" href={action.link}>
       {action.text}
-    </button>
+    </a>
   {/each}
 </div>
 <div class="contents">
   <div class="left-content">
     <div class="ctas">
-      {#each ctas as cta}
+      {#each human.ctas as cta}
         <div class="cta">
           <div class="cta-title">{cta.title}</div>
           <div class="cta-description">{cta.description}</div>
@@ -227,46 +208,35 @@
     <div class="description">
       <div class="description-header">About me</div>
       <div class="description-text">
-        <p>
-          <strong>Andrew Han - Release Version 1.0</strong>
-        </p>
-        <p>
-          Experience Andrew Han, the highly anticipated release of the century! This unique title
-          blends deep logic with artistic creativity, offering a one-of-a-kind experience. The core
-          loop centers around problem-solving, with a focus on maintainability and reusability.
-        </p>
-        <AnimatedText text="WOW!" />
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-          ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-          sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-          est laborum.
-        </p>
-        <AnimatedText text="COOL!" />
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-          ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-          sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-          est laborum.
-        </p>
-        <AnimatedText text="GREAT!" />
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-          ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-          sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-          est laborum.
-        </p>
+        {#snippet description()}
+          {@const { descriptionComponent: DescriptionComponent } = human}
+          <DescriptionComponent {human} />
+        {/snippet}
+        {@render description()}
       </div>
     </div>
   </div>
   <div class="right-content">
-    <div class="info"></div>
+    <div class="info">
+      <div class="info-panel">
+        {#each human.socials as social}
+          {@const { name, icon: Icon, description, link, alertMessage } = social}
+          <a
+            class="info-link"
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            title={description}
+            onclick={() => {
+              if (alertMessage) alert(alertMessage);
+            }}
+          >
+            <div class="info-link-icon"><Icon /></div>
+            <div class="info-link-name">{name}</div>
+          </a>
+        {/each}
+      </div>
+    </div>
   </div>
 </div>
 
@@ -373,12 +343,12 @@
     width: 38px;
     border-radius: 3px;
     background: rgba(35, 60, 81, 0.4);
-    background-image: url('data:image/svg+xml;utf8,<svg width="38" height="18" viewBox="0 0 1 1" xmlns="http://www.w3.org/2000/svg"><polygon transform="translate(0.5, 0) scale(-1, 1) translate(-0.5, 0)" points="0.2,0.5 0.8,0.3 0.8,0.7" fill="rgb(61, 108, 141)"/></svg>');
+    background-image: url('data:image/svg+xml;utf8,<svg width="38" height="18" viewBox="0 0 1 1" xmlns="http://www.w3.org/2000/svg"><polygon transform="translate(0.5, 0) scale(-1, 1) translate(-0.5, 0)" points="0.25,0.5 0.75,0.3 0.75,0.7" fill="rgb(61, 108, 141)"/></svg>');
   }
 
   .carousel::-webkit-scrollbar-button:horizontal:single-button:increment:hover {
     background: #3d6c8d;
-    background-image: url('data:image/svg+xml;utf8,<svg width="38" height="18" viewBox="0 0 1 1" xmlns="http://www.w3.org/2000/svg"><polygon transform="translate(0.5, 0) scale(-1, 1) translate(-0.5, 0)" points="0.2,0.5 0.8,0.3 0.8,0.7" fill="white"/></svg>');
+    background-image: url('data:image/svg+xml;utf8,<svg width="38" height="18" viewBox="0 0 1 1" xmlns="http://www.w3.org/2000/svg"><polygon transform="translate(0.5, 0) scale(-1, 1) translate(-0.5, 0)" points="0.25,0.5 0.75,0.3 0.75,0.7" fill="white"/></svg>');
   }
 
   .carousel::-webkit-scrollbar {
@@ -538,6 +508,7 @@
     color: var(--highlighted-tinted-color);
     background: var(--tinted-color);
     margin-bottom: 4px;
+    text-decoration: none;
   }
 
   .quick-action:hover {
@@ -549,7 +520,7 @@
     margin-top: 32px;
     width: 100%;
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row wrap-reverse;
     align-items: stretch;
     gap: 14px;
   }
@@ -656,5 +627,46 @@
   }
 
   .info {
+    display: flex;
+    flex-flow: column;
+    gap: 8px;
+  }
+
+  .info-panel {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.5) 100%);
+    padding: 16px;
+    display: flex;
+    flex-flow: column;
+    gap: 2px;
+  }
+
+  .info-link {
+    background: rgba(103, 193, 245, 0.1);
+    color: var(--highlighted-tinted-color);
+    padding: 5px 8px;
+    border-radius: 1px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .info-link:hover {
+    background: var(--highlighted-tinted-gradient);
+    color: var(--bright-font-color);
+  }
+
+  .info-link-icon {
+    color: var(--bright-font-color);
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    width: 12px;
+  }
+
+  .info-link-name {
+    font-size: 12px;
   }
 </style>

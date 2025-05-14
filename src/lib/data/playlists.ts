@@ -94,4 +94,19 @@ export const playlists = [
     quarter: 4,
     link: "https://www.youtube.com/playlist?list=PLmhoP55vqRdzTyBfmxMw82FPzaySFFS47",
   },
+  {
+    year: 2024,
+    quarter: 4,
+    link: "https://www.youtube.com/playlist?list=PLmhoP55vqRdzTyBfmxMw82FPzaySFFS47",
+  },
+  {
+    year: 2025,
+    quarter: 1,
+    link: "https://www.youtube.com/playlist?list=PLmhoP55vqRdypjofES-Dc9p764i-f35jb",
+  },
+  {
+    year: 2025,
+    quarter: 2,
+    link: "https://www.youtube.com/playlist?list=PLmhoP55vqRdwTWR7t-EAtwNaZUGa8BhpV",
+  },
 ];
