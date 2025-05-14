@@ -43,7 +43,10 @@
     };
   });
 
-  let hue = $state(parseInt(getComputedStyle(document.body).getPropertyValue("--primary-hue")));
+  const parseHue = parseInt(
+    getComputedStyle(document.documentElement).getPropertyValue("--primary-hue"),
+  );
+  let hue = $state(isNaN(parseHue) ? 202 : parseHue);
 
   let animationFrameId = $state<ReturnType<typeof requestAnimationFrame> | null>(null);
   let lastTimestamp = $state(0);
