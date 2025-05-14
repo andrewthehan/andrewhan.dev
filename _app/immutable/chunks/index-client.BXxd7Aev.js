@@ -1,0 +1,1 @@
+import{t as e,u,v as a,w as t}from"./runtime.DDT7PGJu.js";function c(n){throw new Error("lifecycle_outside_component")}function l(n){e===null&&c(),u&&e.l!==null?i(e).m.push(n):a(()=>{const o=t(n);if(typeof o=="function")return o})}function r(n){e===null&&c(),l(()=>()=>t(n))}function i(n){var o=n.l;return o.u??(o.u={a:[],b:[],m:[]})}export{r as a,l as o};
