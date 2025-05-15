@@ -41,7 +41,6 @@
 
 <SvelteToast />
 <main>
-  <div class="background"></div>
   <div class="content">
     {@render children()}
   </div>
@@ -62,17 +61,5 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-
-  .background {
-    z-index: -1;
-    position: absolute;
-    width: 100%;
-    height: 50%;
-    filter: opacity(0.1) brightness(0.5) grayscale(0.8);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-image: url("https://raw.githubusercontent.com/andrewthehan/butterfly/master/static/butterfly-light.png");
-    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
   }
 </style>

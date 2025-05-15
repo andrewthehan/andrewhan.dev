@@ -8,6 +8,7 @@ export type Human = {
   projects: Project[];
   quickActions: QuickAction[];
   ctas: Cta[];
+  playlists: Playlist[];
   socials: Social[];
   descriptionComponent: any;
 };
@@ -42,6 +43,12 @@ type Cta = {
   description: string;
   button: string;
   cost: number;
+  link: string;
+};
+
+type Playlist = {
+  year: number;
+  quarter: number;
   link: string;
 };
 

@@ -92,6 +92,7 @@
   }}
 />
 
+<div class="background"></div>
 <div class="header">
   <div class="breadcrumbs">
     {#each human.crumbs as crumb, i}
@@ -208,6 +209,22 @@
         </div>
       {/each}
     </div>
+    <div class="playlists">
+      <div class="playlists-header">
+        <div class="playlists-header-text">Playlists for this human</div>
+        <a class="playlists-browse-all-button" href="/playlists">
+          Browse all ({human.playlists.length})</a
+        >
+      </div>
+      {#each human.playlists
+        .toSorted((a, b) => b.year - a.year || b.quarter - a.quarter)
+        .slice(0, 5) as playlist}
+        <a class="playlist" href={playlist.link} target="_blank" rel="noopener noreferrer">
+          <div class="playlist-title">{playlist.year} Q{playlist.quarter}</div>
+          <div class="playlist-price">Free</div>
+        </a>
+      {/each}
+    </div>
     <div class="description">
       <div class="description-header">About me</div>
       <div class="description-text">
@@ -244,6 +261,18 @@
 </div>
 
 <style>
+  .background {
+    z-index: -1;
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    filter: opacity(0.1) brightness(0.5) grayscale(0.8);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("https://raw.githubusercontent.com/andrewthehan/butterfly/master/static/butterfly-light.png");
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  }
+
   .header {
     margin: 10px 0;
     width: 100%;
@@ -612,6 +641,65 @@
   .cta-button:hover {
     color: var(--bright-font-color);
     background: var(--secondary-highlighted-tinted-gradient);
+  }
+
+  .playlists {
+    display: flex;
+    flex-flow: column;
+    gap: 1px;
+    margin-top: 30px;
+  }
+
+  .playlists-header {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 26px;
+  }
+
+  .playlists-header-text {
+    font-size: 14px;
+    color: var(--bright-font-color);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .playlists-browse-all-button {
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 2px;
+    color: var(--bright-font-color);
+    padding: 2px 15px;
+    font-size: 11px;
+    text-decoration: none;
+    line-height: 14px;
+  }
+
+  .playlist {
+    background: linear-gradient(-60deg, rgba(226, 244, 255, 0.3) 5%, rgba(84, 107, 115, 0.3) 95%);
+    padding: 4px;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 12px;
+    font-size: 12px;
+    color: var(--dim-font-color);
+    text-decoration: none;
+  }
+
+  .playlist:hover {
+    background: #417a9b;
+    color: var(--bright-font-color);
+  }
+
+  .playlist:first-of-type {
+    border-top: 1px solid;
+    border-image: var(--border-gradient) 1 0 0 0;
+  }
+
+  .playlist-price {
+    color: var(--bright-font-color);
   }
 
   .description {
