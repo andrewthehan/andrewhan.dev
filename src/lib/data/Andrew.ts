@@ -65,7 +65,7 @@ export const ANDREW: Human = {
       image: checkImage,
     },
     {
-      name: "Piano",
+      name: "Pianola",
       description: "A MIDI pianola",
       link: "https://piano.andrewhan.dev/",
       image: pianolaImage,
@@ -73,7 +73,7 @@ export const ANDREW: Human = {
     {
       name: "Butterfly",
       description: "An artwork utilizing regular polygons",
-      link: "https://github.com/andrewthehan/butterfly",
+      link: "https://butterfly.andrewhan.dev/",
       image:
         "https://raw.githubusercontent.com/andrewthehan/butterfly/master/static/butterfly-light.png",
     },
