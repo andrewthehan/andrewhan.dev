@@ -57,7 +57,7 @@
   }
 
   .playlist:hover {
-    background: #417a9b;
+    background: var(--highlighted-darker-tinted-color);
     color: var(--bright-font-color);
   }
 

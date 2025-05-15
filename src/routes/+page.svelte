@@ -42,22 +42,6 @@
       if (rotationTimeoutId) clearTimeout(rotationTimeoutId);
     };
   });
-
-  const parseHue = parseInt(
-    getComputedStyle(document.documentElement).getPropertyValue("--primary-hue"),
-  );
-  let hue = $state(isNaN(parseHue) ? 202 : parseHue);
-
-  let animationFrameId = $state<ReturnType<typeof requestAnimationFrame> | null>(null);
-  let lastTimestamp = $state(0);
-  function cycle(timestamp: number) {
-    const deltaTime = timestamp - lastTimestamp;
-    hue = (hue + 0.1 * deltaTime) % 360;
-    document.documentElement.style.setProperty("--primary-hue", `${hue}`);
-
-    lastTimestamp = timestamp;
-    animationFrameId = requestAnimationFrame(cycle);
-  }
 </script>
 
 <SequenceListener
@@ -65,30 +49,6 @@
   onTrigger={() => {
     addAchievement(Achievement.HELLO);
     goto("/400");
-  }}
-/>
-
-<SequenceListener
-  sequence={[
-    "ArrowUp",
-    "ArrowUp",
-    "ArrowDown",
-    "ArrowDown",
-    "ArrowLeft",
-    "ArrowRight",
-    "ArrowLeft",
-    "ArrowRight",
-    "b",
-    "a",
-  ]}
-  onTrigger={() => {
-    if (animationFrameId) {
-      cancelAnimationFrame(animationFrameId);
-      animationFrameId = null;
-    } else {
-      lastTimestamp = performance.now();
-      animationFrameId = requestAnimationFrame(cycle);
-    }
   }}
 />
 
@@ -689,7 +649,7 @@
   }
 
   .playlist:hover {
-    background: #417a9b;
+    background: var(--highlighted-darker-tinted-color);
     color: var(--bright-font-color);
   }
 

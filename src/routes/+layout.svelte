@@ -1,11 +1,28 @@
 <script lang="ts">
+  import { goto } from "$app/navigation";
   import { Achievement, addAchievement } from "$lib/game/achievements";
+  import SequenceListener from "$lib/game/components/SequenceListener.svelte";
   import { SvelteToast } from "@zerodevx/svelte-toast";
   import type { Snippet } from "svelte";
   import "../app.css";
-  import { goto } from "$app/navigation";
 
-  export let children: Snippet;
+  const { children }: { children: Snippet } = $props();
+
+  const parseHue = parseInt(
+    getComputedStyle(document.documentElement).getPropertyValue("--primary-hue"),
+  );
+  let hue = $state(isNaN(parseHue) ? 202 : parseHue);
+
+  let animationFrameId = $state<ReturnType<typeof requestAnimationFrame> | null>(null);
+  let lastTimestamp = $state(0);
+  function cycle(timestamp: number) {
+    const deltaTime = timestamp - lastTimestamp;
+    hue = (hue + 0.1 * deltaTime) % 360;
+    document.documentElement.style.setProperty("--primary-hue", `${hue}`);
+
+    lastTimestamp = timestamp;
+    animationFrameId = requestAnimationFrame(cycle);
+  }
 
   (window as any).abracadabra = () => {
     addAchievement(Achievement.MAGICIAN);
@@ -40,6 +57,31 @@
 </svelte:head>
 
 <SvelteToast />
+
+<SequenceListener
+  sequence={[
+    "ArrowUp",
+    "ArrowUp",
+    "ArrowDown",
+    "ArrowDown",
+    "ArrowLeft",
+    "ArrowRight",
+    "ArrowLeft",
+    "ArrowRight",
+    "b",
+    "a",
+  ]}
+  onTrigger={() => {
+    if (animationFrameId) {
+      cancelAnimationFrame(animationFrameId);
+      animationFrameId = null;
+    } else {
+      lastTimestamp = performance.now();
+      animationFrameId = requestAnimationFrame(cycle);
+    }
+  }}
+/>
+
 <main>
   <div class="content">
     {@render children()}
