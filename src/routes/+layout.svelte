@@ -93,7 +93,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow: auto;
+    overflow: hidden auto;
   }
 
   .content {

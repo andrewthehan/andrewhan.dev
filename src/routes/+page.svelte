@@ -239,6 +239,27 @@
           </a>
         {/each}
       </div>
+      <div class="info-panel">
+        <div class="rating">
+          <img
+            src="https://store.cloudflare.steamstatic.com/public/shared/images/game_ratings/ESRB/e.png?v=2"
+            alt="ESRB Rating: Everyone"
+            width="60"
+            height="90"
+          />
+          <div class="rating-description">
+            <div class="content-descriptors">
+              <div>Comic Mischief</div>
+              <div>&nbsp;</div>
+            </div>
+            <div class="interactive-elements">
+              <div class="interactive-elements-title">Interactive Elements</div>
+              In-Game Purchases, Users Interact, Unrestricted Internet
+            </div>
+          </div>
+        </div>
+        <div class="rating-agency">Age rating for: ESRB</div>
+      </div>
     </div>
   </div>
 </div>
@@ -765,5 +786,29 @@
 
   .info-link-name {
     font-size: 12px;
+  }
+
+  .rating {
+    display: flex;
+    flex-flow: row;
+    gap: 10px;
+  }
+
+  .rating-description {
+    font-size: 12px;
+    display: flex;
+    flex-flow: column;
+  }
+
+  .interactive-elements-title {
+    font-size: 12px;
+    color: var(--dim-font-color);
+    margin-top: 4px;
+    margin-bottom: 2px;
+  }
+
+  .rating-agency {
+    font-size: 12px;
+    margin-top: 8px;
   }
 </style>
