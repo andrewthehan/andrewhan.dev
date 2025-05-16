@@ -1,4 +1,4 @@
-import{a as r,b as h,t as o}from"../chunks/disclose-version.GEetfPHU.js";import"../chunks/legacy.BH6Yrukc.js";import{f as u,n as a,s as l}from"../chunks/runtime.Da6SDrSh.js";import{G as s}from"../chunks/GameText.4hNHifiq.js";var c=h(`<!> <!> <!> <pre>
+import{a as r,b as h,t as o}from"../chunks/disclose-version.HldoaMBi.js";import"../chunks/legacy.BH6Yrukc.js";import{f as u,n as a,s as l}from"../chunks/runtime.Da6SDrSh.js";import{G as s}from"../chunks/GameText.DdpRaxSA.js";var c=h(`<!> <!> <!> <pre>
 R
 E
 V
