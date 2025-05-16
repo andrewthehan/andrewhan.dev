@@ -323,15 +323,20 @@
     content: "";
     position: absolute;
     z-index: -1;
-    top: 0;
-    left: calc((100vw - 100%) / -2);
-    width: 100vw;
-    height: 100%;
+    top: -200px;
+    left: calc((250% - 100%) / -2);
+    width: 250%;
+    height: calc(100% + 200px);
     background: radial-gradient(
-      ellipse farthest-corner at bottom center,
-      rgba(0, 0, 0, 0.6) 0%,
-      rgba(0, 0, 0, 0) 60%
-    );
+        ellipse farthest-corner at bottom center,
+        rgba(0, 0, 0, 0.6) 0%,
+        rgba(0, 0, 0, 0) 40%
+      ),
+      radial-gradient(
+        ellipse farthest-corner at top center,
+        hsl(from var(--highlighted-tinted-color) h s l / 0.3) 0%,
+        rgba(0, 0, 0, 0) 60%
+      );
   }
 
   .media {
@@ -363,8 +368,8 @@
 
   .left-carousel-button,
   .right-carousel-button {
-    position: relative;
-    top: -18px;
+    position: absolute;
+    bottom: 0;
     width: 38px;
     height: 18px;
     border: none;
