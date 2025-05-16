@@ -94,7 +94,6 @@
     flex-direction: column;
     align-items: center;
     overflow: auto;
-    scrollbar-gutter: stable;
   }
 
   .content {

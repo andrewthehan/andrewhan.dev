@@ -20,14 +20,15 @@
     }
 
     rotationTimeoutId = setTimeout(() => {
-      setCurrentImageIndex((currentImageIndex + 1) % human.projects.length);
+      setCurrentImageIndex(currentImageIndex + 1);
     }, rotationDelay);
   }
 
   function setCurrentImageIndex(index: number) {
-    currentImageIndex = index;
+    currentImageIndex =
+      ((index % human.projects.length) + human.projects.length) % human.projects.length;
     const currentImage = document.querySelector(
-      `.media-preview:nth-child(${index + 1})`,
+      `.media-preview:nth-child(${currentImageIndex + 1})`,
     ) as HTMLElement;
     scrollIntoViewHorizontally(currentImage, currentImage.parentElement!, {
       behavior: "smooth",
@@ -87,15 +88,37 @@
       {/key}
     </div>
     <div class="carousel">
-      {#each human.projects as project, i}
-        <button
-          class="media-preview"
-          class:selected={i === currentImageIndex}
-          onclick={(e) => setCurrentImageIndex(i)}
-        >
-          <img src={project.image} alt={human.name} />
-        </button>
-      {/each}
+      <div class="carousel-contents">
+        {#each human.projects as project, i}
+          <button
+            class="media-preview"
+            class:selected={i === currentImageIndex}
+            onclick={(e) => setCurrentImageIndex(i)}
+          >
+            <img src={project.image} alt={human.name} />
+          </button>
+        {/each}
+      </div>
+      <button
+        class="left-carousel-button"
+        onclick={() => setCurrentImageIndex(currentImageIndex - 1)}
+      >
+        <svg width="38" height="18" viewBox="0 0 1 1" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="0.25,0.5 0.75,0.3 0.75,0.7" fill="currentColor" />
+        </svg>
+      </button>
+      <button
+        class="right-carousel-button"
+        onclick={() => setCurrentImageIndex(currentImageIndex + 1)}
+      >
+        <svg width="38" height="18" viewBox="0 0 1 1" xmlns="http://www.w3.org/2000/svg">
+          <polygon
+            transform="translate(0.5, 0) scale(-1, 1) translate(-0.5, 0)"
+            points="0.25,0.5 0.75,0.3 0.75,0.7"
+            fill="currentColor"
+          />
+        </svg>
+      </button>
     </div>
   </div>
   <div class="summary">
@@ -312,56 +335,75 @@
   }
 
   .carousel {
-    position: relative;
     display: flex;
-    flex-flow: row;
-    gap: 4px;
-    overflow-x: scroll;
+    flex-flow: column;
+    position: relative;
   }
 
-  .carousel::-webkit-scrollbar-button:horizontal:single-button:decrement {
+  .left-carousel-button,
+  .right-carousel-button {
+    position: relative;
+    top: -18px;
     width: 38px;
+    height: 18px;
+    border: none;
+    padding: 0;
+    background: hsla(calc(var(--primary-hue) + 5), 40%, 23%, 0.4);
+    color: hsl(var(--primary-hue), 40%, 40%);
     border-radius: 3px;
-    background: rgba(35, 60, 81, 0.4);
-    background-image: url('data:image/svg+xml;utf8,<svg width="38" height="18" viewBox="0 0 1 1" xmlns="http://www.w3.org/2000/svg"><polygon points="0.25,0.5 0.75,0.3 0.75,0.7" fill="rgb(61, 108, 141)"/></svg>');
+    cursor: pointer;
   }
 
-  .carousel::-webkit-scrollbar-button:horizontal:single-button:decrement:hover {
-    background: #3d6c8d;
-    background-image: url('data:image/svg+xml;utf8,<svg width="38" height="18" viewBox="0 0 1 1" xmlns="http://www.w3.org/2000/svg"><polygon points="0.25,0.5 0.75,0.3 0.75,0.7" fill="white"/></svg>');
+  .left-carousel-button:hover,
+  .right-carousel-button:hover {
+    background: var(--highlighted-scrollbar-gradient);
+    color: white;
   }
 
-  .carousel::-webkit-scrollbar-button:horizontal:single-button:increment {
-    width: 38px;
-    border-radius: 3px;
-    background: rgba(35, 60, 81, 0.4);
-    background-image: url('data:image/svg+xml;utf8,<svg width="38" height="18" viewBox="0 0 1 1" xmlns="http://www.w3.org/2000/svg"><polygon transform="translate(0.5, 0) scale(-1, 1) translate(-0.5, 0)" points="0.25,0.5 0.75,0.3 0.75,0.7" fill="rgb(61, 108, 141)"/></svg>');
+  .left-carousel-button {
+    align-self: flex-start;
   }
 
-  .carousel::-webkit-scrollbar-button:horizontal:single-button:increment:hover {
-    background: #3d6c8d;
-    background-image: url('data:image/svg+xml;utf8,<svg width="38" height="18" viewBox="0 0 1 1" xmlns="http://www.w3.org/2000/svg"><polygon transform="translate(0.5, 0) scale(-1, 1) translate(-0.5, 0)" points="0.25,0.5 0.75,0.3 0.75,0.7" fill="white"/></svg>');
+  .right-carousel-button {
+    align-self: flex-end;
+    top: calc(-18px * 2);
   }
 
-  .carousel::-webkit-scrollbar {
+  .carousel-contents::-webkit-scrollbar-button:horizontal:single-button:decrement {
+    width: calc(38px + 1px);
+  }
+
+  .carousel-contents::-webkit-scrollbar-button:horizontal:single-button:increment {
+    width: calc(38px + 1px);
+  }
+
+  .carousel-contents::-webkit-scrollbar {
     border-radius: 3px;
     height: 18px;
   }
 
-  .carousel::-webkit-scrollbar-track {
+  .carousel-contents::-webkit-scrollbar-track {
     border-radius: 3px;
     background: rgba(0, 0, 0, 0.2);
   }
 
-  .carousel::-webkit-scrollbar-thumb {
+  .carousel-contents::-webkit-scrollbar-thumb {
     border: none;
     height: 18px;
     border-radius: 3px;
-    background: rgba(35, 60, 81, 0.4);
+    background: hsl(from var(--scrollbar-color) h s l / 0.4);
   }
 
-  .carousel::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(135deg, #3d6c8d 0%, #2e5470 100%);
+  .carousel-contents::-webkit-scrollbar-thumb:hover {
+    background: var(--highlighted-scrollbar-gradient);
+  }
+
+  .carousel-contents {
+    display: flex;
+    flex-flow: row;
+    gap: 4px;
+    overflow-x: scroll;
+    padding-bottom: 3px;
   }
 
   .media-preview {
@@ -633,6 +675,10 @@
     font-size: 11px;
     text-decoration: none;
     line-height: 14px;
+  }
+
+  .playlists-browse-all-button:hover {
+    border-color: var(--bright-font-color);
   }
 
   .playlist {

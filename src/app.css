@@ -24,6 +24,12 @@
     var(--highlighted-tinted-color) 0%,
     var(--highlighted-darker-tinted-color) 100%
   );
+  --scrollbar-color: hsl(calc(var(--primary-hue) + 5.4), 39.7%, 22.7%);
+  --highlighted-scrollbar-gradient: linear-gradient(
+    135deg,
+    hsl(calc(var(--primary-hue) + 2.8), 39.6%, 39.6%) 0%,
+    hsl(calc(var(--primary-hue) + 3.5), 41.8%, 31%) 100%
+  );
 
   --secondary-hue: calc(var(--primary-hue) + 243);
   --secondary-text-color: hsl(var(--secondary-hue), 68.6%, 80%);
