@@ -50,8 +50,19 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Andrew Han" />
   <meta property="og:description" content="Andrew Han's personal site" />
+  <meta property="og:site_name" content="andrewhan.dev" />
   <meta
     property="og:image"
+    content="https://raw.githubusercontent.com/andrewthehan/butterfly/master/static/butterfly-light.png"
+  />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="twitter:domain" content="andrewhan.dev" />
+  <meta property="twitter:url" content="https://andrewhan.dev" />
+  <meta name="twitter:title" content="Andrew Han" />
+  <meta name="twitter:description" content="Andrew Han's personal site" />
+  <meta
+    name="twitter:image"
     content="https://raw.githubusercontent.com/andrewthehan/butterfly/master/static/butterfly-light.png"
   />
 </svelte:head>

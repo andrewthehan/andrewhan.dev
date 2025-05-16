@@ -102,6 +102,7 @@
       <button
         class="left-carousel-button"
         onclick={() => setCurrentImageIndex(currentImageIndex - 1)}
+        aria-label="Previous"
       >
         <svg width="38" height="18" viewBox="0 0 1 1" xmlns="http://www.w3.org/2000/svg">
           <polygon points="0.25,0.5 0.75,0.3 0.75,0.7" fill="currentColor" />
@@ -110,6 +111,7 @@
       <button
         class="right-carousel-button"
         onclick={() => setCurrentImageIndex(currentImageIndex + 1)}
+        aria-label="Next"
       >
         <svg width="38" height="18" viewBox="0 0 1 1" xmlns="http://www.w3.org/2000/svg">
           <polygon
@@ -268,13 +270,21 @@
   .background {
     z-index: -1;
     position: absolute;
-    width: 100%;
-    height: 50%;
-    filter: opacity(0.1) brightness(0.5) grayscale(0.8);
+    width: 2000px;
+    object-fit: cover;
+    aspect-ratio: 3/1;
+    filter: opacity(0.15) brightness(0.4) grayscale(0.8) blur(1px);
     background-repeat: no-repeat;
     background-size: cover;
     background-image: url("https://raw.githubusercontent.com/andrewthehan/butterfly/master/static/butterfly-light.png");
-    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    mask-image: radial-gradient(ellipse farthest-corner at center, black 40%, transparent 50%);
+  }
+
+  @media (max-width: 600px) {
+    .background {
+      background: none;
+      filter: none;
+    }
   }
 
   .header {
@@ -327,16 +337,24 @@
     left: calc((250% - 100%) / -2);
     width: 250%;
     height: calc(100% + 200px);
+    filter: blur(100px);
     background: radial-gradient(
         ellipse farthest-corner at bottom center,
         rgba(0, 0, 0, 0.6) 0%,
         rgba(0, 0, 0, 0) 40%
       ),
       radial-gradient(
-        ellipse farthest-corner at top center,
-        hsl(from var(--highlighted-tinted-color) h s l / 0.3) 0%,
+        ellipse farthest-corner at center,
+        hsl(from var(--highlighted-tinted-color) h s l / 0.6) 0%,
         rgba(0, 0, 0, 0) 60%
       );
+  }
+
+  @media (max-width: calc(600px)) {
+    .hero::before {
+      background: none;
+      filter: none;
+    }
   }
 
   .media {
