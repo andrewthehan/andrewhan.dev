@@ -1,12 +1,13 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
+  import { ANDREW } from "$lib/data/Andrew";
   import { Achievement, addAchievement } from "$lib/game/achievements";
   import SequenceListener from "$lib/game/components/SequenceListener.svelte";
+  import { randomInt } from "$lib/game/random";
+  import { scrollIntoViewHorizontally } from "$lib/utils/htmlUtils";
+  import { onMount } from "svelte";
   import { fade } from "svelte/transition";
   import "../app.css";
-  import { ANDREW } from "$lib/data/Andrew";
-  import { onMount } from "svelte";
-  import { scrollIntoViewHorizontally } from "$lib/utils/htmlUtils";
 
   const human = $state(ANDREW);
 
@@ -44,6 +45,23 @@
     };
   });
 </script>
+
+<svelte:head>
+  <title>{human.name}</title>
+  <meta name="description" content={human.summaryDescription} />
+
+  <meta property="og:title" content={human.name} />
+  <meta property="og:description" content={human.summaryDescription} />
+  <meta property="og:image" content={human.summaryImage} />
+
+  <meta name="twitter:title" content={human.name} />
+  <meta name="twitter:description" content={human.summaryDescription} />
+  <meta name="twitter:image" content={human.summaryImage} />
+
+  <meta itemprop="priceCurrency" content="USD" />
+  <meta itemprop="price" content="0.00" />
+  <meta itemprop="reviewCount" content={`${randomInt(1000000, 2000000)}`} />
+</svelte:head>
 
 <SequenceListener
   sequence={[..."hello"]}

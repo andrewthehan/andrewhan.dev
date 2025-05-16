@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { browser } from "$app/environment";
   import { goto } from "$app/navigation";
   import { Achievement, addAchievement } from "$lib/game/achievements";
   import SequenceListener from "$lib/game/components/SequenceListener.svelte";
@@ -8,10 +9,11 @@
 
   const { children }: { children: Snippet } = $props();
 
-  const parseHue = parseInt(
-    getComputedStyle(document.documentElement).getPropertyValue("--primary-hue"),
-  );
-  let hue = $state(isNaN(parseHue) ? 202 : parseHue);
+  const DEFAULT_HUE = 202;
+  const parseHue = browser
+    ? parseInt(getComputedStyle(document.documentElement).getPropertyValue("--primary-hue"))
+    : DEFAULT_HUE;
+  let hue = $state(isNaN(parseHue) ? DEFAULT_HUE : parseHue);
 
   let animationFrameId = $state<ReturnType<typeof requestAnimationFrame> | null>(null);
   let lastTimestamp = $state(0);
@@ -24,47 +26,34 @@
     animationFrameId = requestAnimationFrame(cycle);
   }
 
-  (window as any).abracadabra = () => {
-    addAchievement(Achievement.MAGICIAN);
-    alert(`✨ Send an email to me@andrewhan.dev if you're having fun! ✨`);
-  };
+  if (browser) {
+    (window as any).abracadabra = () => {
+      addAchievement(Achievement.MAGICIAN);
+      alert(`✨ Send an email to me@andrewhan.dev if you're having fun! ✨`);
+    };
 
-  (window as any).alakazam = () => {
-    addAchievement(Achievement.MAGICIAN);
-    alert(`✨ That's a Pokémon. ✨`);
-  };
+    (window as any).alakazam = () => {
+      addAchievement(Achievement.MAGICIAN);
+      alert(`✨ That's a Pokémon. ✨`);
+    };
 
-  (window as any).hocuspocus = () => {
-    addAchievement(Achievement.MAGICIAN);
-    goto("/squares");
-  };
+    (window as any).hocuspocus = () => {
+      addAchievement(Achievement.MAGICIAN);
+      goto("/squares");
+    };
+  }
 
   console.log("👀 You can look around but visiting the Sources tab may spoil the fun.");
 </script>
 
 <svelte:head>
-  <title>Andrew Han</title>
-  <meta name="description" content="Andrew Han's personal site" />
-
   <meta property="og:url" content="https://andrewhan.dev/" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Andrew Han" />
-  <meta property="og:description" content="Andrew Han's personal site" />
   <meta property="og:site_name" content="andrewhan.dev" />
-  <meta
-    property="og:image"
-    content="https://raw.githubusercontent.com/andrewthehan/butterfly/master/static/butterfly-light.png"
-  />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta property="twitter:domain" content="andrewhan.dev" />
   <meta property="twitter:url" content="https://andrewhan.dev" />
-  <meta name="twitter:title" content="Andrew Han" />
-  <meta name="twitter:description" content="Andrew Han's personal site" />
-  <meta
-    name="twitter:image"
-    content="https://raw.githubusercontent.com/andrewthehan/butterfly/master/static/butterfly-light.png"
-  />
 </svelte:head>
 
 <SvelteToast />
