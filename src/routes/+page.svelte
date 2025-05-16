@@ -3,7 +3,6 @@
   import { ANDREW } from "$lib/data/Andrew";
   import { Achievement, addAchievement } from "$lib/game/achievements";
   import SequenceListener from "$lib/game/components/SequenceListener.svelte";
-  import { randomInt } from "$lib/game/random";
   import { scrollIntoViewHorizontally } from "$lib/utils/htmlUtils";
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
@@ -57,10 +56,6 @@
   <meta name="twitter:title" content={human.name} />
   <meta name="twitter:description" content={human.summaryDescription} />
   <meta name="twitter:image" content={human.summaryImage} />
-
-  <meta itemprop="priceCurrency" content="USD" />
-  <meta itemprop="price" content="0.00" />
-  <meta itemprop="reviewCount" content={`${randomInt(1000000, 2000000)}`} />
 </svelte:head>
 
 <SequenceListener
@@ -71,7 +66,9 @@
   }}
 />
 
-<div class="background"></div>
+<div class="background-container">
+  <div class="background"></div>
+</div>
 <div class="header">
   <div class="breadcrumbs">
     {#each human.crumbs as crumb, i}
@@ -285,8 +282,17 @@
 </div>
 
 <style>
-  .background {
+  .background-container {
     z-index: -1;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+  }
+
+  .background {
     position: absolute;
     width: 2000px;
     object-fit: cover;
