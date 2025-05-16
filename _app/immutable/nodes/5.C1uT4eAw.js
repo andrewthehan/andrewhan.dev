@@ -1,0 +1,1 @@
+import{t as r,a as m}from"../chunks/disclose-version.YmFUJLpA.js";import"../chunks/legacy.EPiu55y1.js";import{n as a}from"../chunks/runtime.DOeph17h.js";import{G as p}from"../chunks/GameText.CUQSuUka.js";function x(t){p(t,{element:"p",children:(e,n)=>{a();var o=r("Hmm... where to go now..?");m(e,o)},$$slots:{default:!0}})}export{x as component};
