@@ -46,6 +46,10 @@
     text-decoration: underline;
   }
 
+  .project-name:hover {
+    color: var(--bright-font-color);
+  }
+
   .project-image {
     grid-area: 1 / 1;
     width: 100%;
