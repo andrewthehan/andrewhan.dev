@@ -957,6 +957,11 @@
     text-align: center;
   }
 
+  .achievement-more:hover {
+    background: var(--highlighted-tinted-gradient);
+    color: var(--bright-font-color);
+  }
+
   .embed-modal {
     background: radial-gradient(
         circle at top left,
