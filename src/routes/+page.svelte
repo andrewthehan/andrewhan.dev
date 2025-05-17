@@ -446,7 +446,6 @@
     left: calc((250% - 100%) / -2);
     width: 250%;
     height: calc(100% + 200px);
-    filter: blur(100px);
     background: radial-gradient(
         ellipse farthest-corner at bottom center,
         rgba(0, 0, 0, 0.6) 0%,
@@ -454,7 +453,7 @@
       ),
       radial-gradient(
         ellipse farthest-corner at center,
-        hsl(from var(--highlighted-tinted-color) h s l / 0.6) 0%,
+        hsl(from var(--highlighted-tinted-color) h s l / 0.3) 0%,
         rgba(0, 0, 0, 0) 60%
       );
   }
