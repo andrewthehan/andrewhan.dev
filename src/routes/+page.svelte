@@ -339,8 +339,9 @@
   .background-container {
     z-index: -1;
     position: absolute;
-    width: 100vw;
-    height: 100vh;
+    margin: 0;
+    width: 99vw;
+    height: 99vh;
     overflow: hidden;
     display: flex;
     justify-content: center;
