@@ -175,11 +175,13 @@
           </div>
         {/each}
       </div>
-      <div class="tag-header">Popular user-defined tags for this product:</div>
-      <div class="tags">
-        {#each human.tags as tag}
-          <div class="tag">{tag}</div>
-        {/each}
+      <div>
+        <div class="tag-header">Popular user-defined tags for this product:</div>
+        <div class="tags">
+          {#each human.tags as tag}
+            <div class="tag">{tag}</div>
+          {/each}
+        </div>
       </div>
     </div>
   </div>
