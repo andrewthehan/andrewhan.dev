@@ -274,4 +274,12 @@ export const ANDREW: Human = {
     { name: "Python", proficiency: "intermediate" },
     { name: "C++", proficiency: "beginner" },
   ],
+  awards: [
+    {
+      name: "MTAC CM for Piano Performance and Theory (Level 10 Advanced)",
+      image:
+        "https://www.mtac.org/wp-content/uploads/2017/10/cropped-MTAC-Logo-Association_FINAL_circle-R_OL_cs5.jpg",
+      link: "https://www.mtac.org/programs/cm/",
+    },
+  ],
 };

@@ -14,6 +14,7 @@ export type Human = {
   languages: LanguageSupport[];
   contentDescriptors: string[];
   interactiveElements: string[];
+  awards: Award[];
 };
 
 type Crumb = {
@@ -71,3 +72,9 @@ type LanguageSupport = {
 export const languageProficiencyValues = ["beginner", "intermediate", "advanced"] as const;
 
 type LanguageProficiency = (typeof languageProficiencyValues)[number];
+
+type Award = {
+  name: string;
+  image: string;
+  link: string;
+};

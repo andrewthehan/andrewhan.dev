@@ -345,6 +345,22 @@
           </div>
         </Modal>
       </div>
+      <div class="info-panel">
+        <div class="info-panel-title">Awards</div>
+        <div class="awards">
+          {#each human.awards as award}
+            <a
+              class="award"
+              title={award.name}
+              href={award.link}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={award.image} alt={award.name} />
+            </a>
+          {/each}
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -969,5 +985,20 @@
   .embed-modal-description {
     font-size: 14px;
     color: #acb2b8;
+  }
+
+  .awards {
+    display: flex;
+    flex-flow: column;
+    gap: 20px;
+  }
+
+  .award {
+    padding: 5px 0;
+  }
+
+  .award img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
   }
 </style>
