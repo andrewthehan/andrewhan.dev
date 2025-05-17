@@ -1,18 +1,16 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
+  import Cta from "$lib/components/Cta.svelte";
   import { ANDREW } from "$lib/data/Andrew";
-  import {
-    Achievement,
-    addAchievement,
-    getAchievementData,
-    getAchievements,
-  } from "$lib/game/achievements";
+  import { languageProficiencyValues } from "$lib/data/Human";
+  import { Achievement, addAchievement, getAchievementData } from "$lib/game/achievements";
   import SequenceListener from "$lib/game/components/SequenceListener.svelte";
   import { scrollIntoViewHorizontally } from "$lib/utils/htmlUtils";
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
   import "../app.css";
-  import { languageProficiencyValues } from "$lib/data/Human";
+  import Modal from "$lib/components/Modal.svelte";
+  import { page } from "$app/stores";
 
   const human = $state(ANDREW);
 
@@ -49,6 +47,8 @@
       if (rotationTimeoutId) clearTimeout(rotationTimeoutId);
     };
   });
+
+  let showEmbedModal = $state(false);
 </script>
 
 <svelte:head>
@@ -186,7 +186,7 @@
 </div>
 <div class="quick-actions">
   {#each human.quickActions as action}
-    <a class="quick-action" href={action.link}>
+    <a class="flat-button" href={action.link}>
       {action.text}
     </a>
   {/each}
@@ -195,32 +195,20 @@
   <div class="left-content">
     <div class="ctas">
       {#each human.ctas as cta}
-        <div class="cta">
-          <div class="cta-title">{cta.title}</div>
-          <div class="cta-description">{cta.description}</div>
-          <div class="cta-action">
-            <div class="cta-cost">
-              {#if cta.cost > 0}
-                {new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(
-                  cta.cost,
-                )}
-              {:else}
-                Free
-              {/if}
-            </div>
-            <a class="cta-button" href={cta.link} target="_blank" rel="noopener noreferrer">
-              {cta.button}
-            </a>
+        <Cta cost={cta.cost} action={cta.button} onclick={() => goto(cta.link)}>
+          <div class="cta">
+            <div class="cta-title">{cta.title}</div>
+            <div class="cta-description">{cta.description}</div>
           </div>
-        </div>
+        </Cta>
       {/each}
     </div>
     <div class="playlists">
       <div class="playlists-header">
         <div class="playlists-header-text">Playlists for this human</div>
         <a class="playlists-browse-all-button" href="/playlists">
-          Browse all ({human.playlists.length})</a
-        >
+          Browse all ({human.playlists.length})
+        </a>
       </div>
       {#each human.playlists
         .toSorted((a, b) => b.year - a.year || b.quarter - a.quarter)
@@ -327,9 +315,35 @@
             </div>
           {/each}
           <a class="achievement-more" href="/achievements">
-            View<br />all {Object.values(Achievement).length}
+            View
+            <br />
+            all {Object.values(Achievement).length}
           </a>
         </div>
+      </div>
+      <div class="info-panel">
+        <div>
+          <button class="flat-button" onclick={() => (showEmbedModal = true)}>Embed</button>
+        </div>
+        <Modal bind:showModal={showEmbedModal}>
+          <div class="embed-modal">
+            <div class="embed-modal-title">Create Widget to Embed</div>
+            <iframe
+              src="/widget"
+              title={human.name}
+              frameborder="0"
+              width="600"
+              height="200"
+            ></iframe>
+            <div class="embed-modal-description">
+              Copy and paste the HTML below into your website to make the above widget appear
+            </div>
+            <textarea
+              readonly
+              value={`<iframe src="${$page.url.origin}/widget" title="${human.name}" frameborder="0" width="600" height="200"></iframe>`}
+            ></textarea>
+          </div>
+        </Modal>
       </div>
     </div>
   </div>
@@ -434,6 +448,23 @@
       background: none;
       filter: none;
     }
+  }
+
+  .flat-button {
+    border: none;
+    padding: 0 15px;
+    font-size: 15px;
+    line-height: 30px;
+    cursor: pointer;
+    border-radius: 2px;
+    color: var(--highlighted-tinted-color);
+    background: var(--tinted-color);
+    text-decoration: none;
+  }
+
+  .flat-button:hover {
+    color: var(--bright-font-color);
+    background: var(--highlighted-tinted-gradient);
   }
 
   .media {
@@ -649,28 +680,11 @@
   .quick-actions {
     width: 100%;
     padding: 16px;
+    padding-bottom: 20px;
     background: rgba(0, 0, 0, 0.2);
     display: flex;
     flex-flow: row wrap;
     gap: 4px;
-  }
-
-  .quick-action {
-    border: none;
-    padding: 0 15px;
-    font-size: 15px;
-    line-height: 30px;
-    cursor: pointer;
-    border-radius: 2px;
-    color: var(--highlighted-tinted-color);
-    background: var(--tinted-color);
-    margin-bottom: 4px;
-    text-decoration: none;
-  }
-
-  .quick-action:hover {
-    color: var(--bright-font-color);
-    background: var(--highlighted-tinted-gradient);
   }
 
   .contents {
@@ -701,21 +715,15 @@
     display: flex;
     flex-flow: column;
     gap: 28px;
+    border-top: 1px solid;
+    border-image: var(--border-gradient) 1 0 0 0;
   }
 
   .cta {
-    position: relative;
-    display: flex;
-    flex-flow: column;
     padding: 16px;
     padding-bottom: 26px;
-    background: linear-gradient(-60deg, rgba(226, 244, 255, 0.3) 5%, rgba(84, 107, 115, 0.3) 95%);
     border-radius: 4px;
-  }
-
-  .cta:first-of-type {
-    border-top: 1px solid;
-    border-image: var(--border-gradient) 1 0 0 0;
+    background: linear-gradient(-60deg, rgba(226, 244, 255, 0.3) 5%, rgba(84, 107, 115, 0.3) 95%);
   }
 
   .cta-title {
@@ -729,43 +737,6 @@
     line-height: 18px;
     color: var(--dim-font-color);
     margin-top: 4px;
-  }
-
-  .cta-action {
-    position: absolute;
-    right: 16px;
-    bottom: -17px;
-    background: black;
-    padding: 3px;
-    border-radius: 2px;
-    display: flex;
-    flex-flow: row;
-    align-items: center;
-  }
-
-  .cta-cost {
-    padding: 0 12px;
-    font-size: 13px;
-  }
-
-  .cta-button {
-    border-radius: 2px;
-    border: none;
-    padding: 0 15px;
-    font-size: 15px;
-    line-height: 30px;
-    padding: 0 15px;
-    border-radius: 2x;
-    cursor: pointer;
-    color: var(--secondary-text-color);
-    text-decoration: none;
-    background: var(--secondary-tinted-gradient);
-    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3);
-  }
-
-  .cta-button:hover {
-    color: var(--bright-font-color);
-    background: var(--secondary-highlighted-tinted-gradient);
   }
 
   .playlists {
@@ -967,5 +938,36 @@
     background: var(--tinted-color);
     text-decoration: none;
     text-align: center;
+  }
+
+  .embed-modal {
+    background: radial-gradient(
+        circle at top left,
+        rgba(74, 81, 92, 0.4) 0%,
+        rgba(75, 81, 92, 0) 60%
+      ),
+      #25282e;
+    display: flex;
+    flex-flow: column;
+    gap: 24px;
+    padding: 24px;
+    border-top: 1px solid;
+    border-image: linear-gradient(
+        to right,
+        hsl(calc(var(--primary-hue) - 10), 100%, 50%),
+        hsl(calc(var(--primary-hue) + 23), 100%, 60%)
+      )
+      1 0 0 0;
+  }
+
+  .embed-modal-title {
+    font-size: 22px;
+    color: var(--bright-font-color);
+    font-weight: bold;
+  }
+
+  .embed-modal-description {
+    font-size: 14px;
+    color: #acb2b8;
   }
 </style>
