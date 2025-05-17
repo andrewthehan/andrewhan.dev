@@ -19,7 +19,7 @@
       return;
     }
 
-    alert("TODO");
+    alert("Try entering the Konami Code anywhere on this site.");
   }
 </script>
 
