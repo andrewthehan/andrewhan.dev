@@ -38,6 +38,7 @@
     margin: 1em 0;
     display: flex;
     flex-flow: column;
+    align-items: flex-start;
   }
 
   .project-name {
@@ -57,6 +58,7 @@
   }
 
   .project-separator {
+    align-self: stretch;
     margin: 1rem 0;
     border-top: 1px solid;
     border-image: var(--border-gradient) 1 0 0 0;
