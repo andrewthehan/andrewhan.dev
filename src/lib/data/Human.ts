@@ -11,6 +11,7 @@ export type Human = {
   playlists: Playlist[];
   socials: Social[];
   descriptionComponent: any;
+  languages: LanguageSupport[];
   contentDescriptors: string[];
   interactiveElements: string[];
 };
@@ -61,3 +62,12 @@ type Social = {
   link?: string;
   alertMessage?: string;
 };
+
+type LanguageSupport = {
+  name: string;
+  proficiency: LanguageProficiency;
+};
+
+export const languageProficiencyValues = ["beginner", "intermediate", "advanced"] as const;
+
+type LanguageProficiency = (typeof languageProficiencyValues)[number];

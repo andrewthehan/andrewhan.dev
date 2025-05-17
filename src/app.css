@@ -15,6 +15,8 @@
     transparent 100%
   );
   --dim-font-color: #8f98a0;
+  --table-border-color: #626366;
+  --table-header-color: #b0aeac;
   --bright-font-color: white;
   --highlighted-tinted-color: hsl(var(--primary-hue), 87.7%, 68.2%);
   --highlighted-darker-tinted-color: hsl(var(--primary-hue), 40.9%, 43.1%);

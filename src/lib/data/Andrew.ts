@@ -261,4 +261,17 @@ export const ANDREW: Human = {
   descriptionComponent: AndrewDescription,
   contentDescriptors: ["Comic Mischief"],
   interactiveElements: ["In-Game Purchases", "Users Interact", "Unrestricted Internet"],
+  languages: [
+    { name: "English", proficiency: "advanced" },
+    { name: "Korean", proficiency: "beginner" },
+    { name: "Spanish", proficiency: "beginner" },
+    { name: "Java", proficiency: "advanced" },
+    { name: "Kotlin", proficiency: "advanced" },
+    { name: "JavaScript", proficiency: "advanced" },
+    { name: "TypeScript", proficiency: "advanced" },
+    { name: "HTML", proficiency: "intermediate" },
+    { name: "CSS", proficiency: "intermediate" },
+    { name: "Python", proficiency: "intermediate" },
+    { name: "C++", proficiency: "beginner" },
+  ],
 };

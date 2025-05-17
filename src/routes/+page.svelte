@@ -7,6 +7,7 @@
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
   import "../app.css";
+  import { languageProficiencyValues } from "$lib/data/Human";
 
   const human = $state(ANDREW);
 
@@ -252,9 +253,39 @@
             }}
           >
             <div class="info-link-icon"><Icon /></div>
-            <div class="info-link-name">{name}</div>
+            <div>{name}</div>
           </a>
         {/each}
+      </div>
+
+      <div class="info-panel">
+        <div class="language-title">Languages:</div>
+        <table class="language-table">
+          <thead>
+            <tr>
+              <th>&nbsp;</th>
+              {#each languageProficiencyValues as proficiency}
+                <th>{proficiency}</th>
+              {/each}
+            </tr>
+          </thead>
+          <tbody>
+            {#each human.languages as language}
+              <tr>
+                <td class="language-name">{language.name}</td>
+                {#each languageProficiencyValues as proficiency}
+                  <td>
+                    {#if language.proficiency === proficiency}
+                      <div class="checkmark">✔</div>
+                    {:else}
+                      <div class="checkmark"></div>
+                    {/if}
+                  </td>
+                {/each}
+              </tr>
+            {/each}
+          </tbody>
+        </table>
       </div>
       <div class="info-panel">
         <div class="rating">
@@ -797,6 +828,7 @@
     display: flex;
     flex-flow: column;
     gap: 8px;
+    font-size: 12px;
   }
 
   .info-panel {
@@ -829,12 +861,40 @@
     color: var(--bright-font-color);
     display: flex;
     align-items: center;
-    font-size: 12px;
     width: 12px;
   }
 
-  .info-link-name {
-    font-size: 12px;
+  .language-table {
+    border-collapse: collapse;
+  }
+
+  .language-title {
+    color: var(--dim-font-color);
+  }
+
+  .language-table th {
+    font-weight: normal;
+    text-transform: capitalize;
+    color: var(--table-header-color);
+  }
+
+  .language-table tr {
+    border-bottom: 1px solid var(--table-border-color);
+  }
+
+  .language-table td {
+    padding: 3px 0;
+  }
+
+  .language-name {
+    color: var(--dim-font-color);
+    margin-bottom: 2px;
+    width: 94px;
+  }
+
+  .checkmark {
+    color: var(--highlighted-tinted-color);
+    text-align: center;
   }
 
   .rating {
@@ -844,20 +904,17 @@
   }
 
   .rating-description {
-    font-size: 12px;
     display: flex;
     flex-flow: column;
   }
 
   .interactive-elements-title {
-    font-size: 12px;
     color: var(--dim-font-color);
     margin-top: 4px;
     margin-bottom: 2px;
   }
 
   .rating-agency {
-    font-size: 12px;
     margin-top: 8px;
   }
 </style>
