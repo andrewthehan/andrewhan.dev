@@ -266,12 +266,14 @@
           />
           <div class="rating-description">
             <div class="content-descriptors">
-              <div>Comic Mischief</div>
+              {#each human.contentDescriptors as descriptor}
+                <div>{descriptor}</div>
+              {/each}
               <div>&nbsp;</div>
             </div>
             <div class="interactive-elements">
               <div class="interactive-elements-title">Interactive Elements</div>
-              In-Game Purchases, Users Interact, Unrestricted Internet
+              {human.interactiveElements.join(", ")}
             </div>
           </div>
         </div>

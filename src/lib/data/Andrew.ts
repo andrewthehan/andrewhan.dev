@@ -259,4 +259,6 @@ export const ANDREW: Human = {
     },
   ],
   descriptionComponent: AndrewDescription,
+  contentDescriptors: ["Comic Mischief"],
+  interactiveElements: ["In-Game Purchases", "Users Interact", "Unrestricted Internet"],
 };

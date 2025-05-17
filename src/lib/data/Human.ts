@@ -11,6 +11,8 @@ export type Human = {
   playlists: Playlist[];
   socials: Social[];
   descriptionComponent: any;
+  contentDescriptors: string[];
+  interactiveElements: string[];
 };
 
 type Crumb = {
