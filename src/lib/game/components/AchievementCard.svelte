@@ -7,7 +7,10 @@
 </script>
 
 <div class="achievement">
-  <div class="achievement-icon" style:background={locked ? "gray" : "var(--primary-color)"}>
+  <div
+    class="achievement-icon"
+    style:background={locked ? "gray" : "var(--highlighted-tinted-color)"}
+  >
     <Icon font-size={64} color={"var(--foreground-color)"} />
   </div>
   <div class="achievement-text">

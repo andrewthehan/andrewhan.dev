@@ -7,9 +7,9 @@
 </script>
 
 <section>
-  <GameText --font-size="40px"
-    >Achievements ({achievements.length} / {Object.values(Achievement).length})</GameText
-  >
+  <GameText --font-size="40px">
+    Achievements ({achievements.length}&nbsp;/&nbsp;{Object.values(Achievement).length})
+  </GameText>
   <div class="achievements">
     {#each Object.values(Achievement) as achievement (achievement)}
       {#if achievements.includes(achievement)}
@@ -24,6 +24,10 @@
 <style>
   section {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem 0;
   }
 
   .achievements {

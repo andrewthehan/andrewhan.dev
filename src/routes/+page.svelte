@@ -1,7 +1,12 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { ANDREW } from "$lib/data/Andrew";
-  import { Achievement, addAchievement } from "$lib/game/achievements";
+  import {
+    Achievement,
+    addAchievement,
+    getAchievementData,
+    getAchievements,
+  } from "$lib/game/achievements";
   import SequenceListener from "$lib/game/components/SequenceListener.svelte";
   import { scrollIntoViewHorizontally } from "$lib/utils/htmlUtils";
   import { onMount } from "svelte";
@@ -259,7 +264,7 @@
       </div>
 
       <div class="info-panel">
-        <div class="language-title">Languages:</div>
+        <div class="info-panel-title">Languages:</div>
         <table class="language-table">
           <thead>
             <tr>
@@ -309,6 +314,22 @@
           </div>
         </div>
         <div class="rating-agency">Age rating for: ESRB</div>
+      </div>
+      <div class="info-panel">
+        <div class="info-panel-title">
+          Includes {Object.values(Achievement).length} Achievements
+        </div>
+        <div class="achievements">
+          {#each Object.values(Achievement).slice(0, 3) as achievement}
+            {@const { name, icon: Icon } = getAchievementData(achievement)}
+            <div class="achievement" title={name}>
+              <Icon font-size={64} />
+            </div>
+          {/each}
+          <a class="achievement-more" href="/achievements">
+            View<br />all {Object.values(Achievement).length}
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -839,6 +860,11 @@
     gap: 2px;
   }
 
+  .info-panel-title {
+    color: var(--dim-font-color);
+    margin-bottom: 2px;
+  }
+
   .info-link {
     background: rgba(103, 193, 245, 0.1);
     color: var(--highlighted-tinted-color);
@@ -866,10 +892,6 @@
 
   .language-table {
     border-collapse: collapse;
-  }
-
-  .language-title {
-    color: var(--dim-font-color);
   }
 
   .language-table th {
@@ -916,5 +938,33 @@
 
   .rating-agency {
     margin-top: 8px;
+  }
+
+  .achievements {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 4px;
+    padding: 4px 0;
+    margin-bottom: 5px;
+  }
+
+  .achievement,
+  .achievement-more {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--highlighted-tinted-color);
+  }
+
+  .achievement-more {
+    flex: 1;
+    border-radius: 1px;
+    font-size: 13px;
+    color: var(--highlighted-tinted-color);
+    background: var(--tinted-color);
+    text-decoration: none;
+    text-align: center;
   }
 </style>
