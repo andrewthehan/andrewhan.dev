@@ -502,7 +502,7 @@
     grid-area: 1 / 1;
     width: 100%;
     object-fit: cover;
-    aspect-ratio: 5/3;
+    aspect-ratio: 600/337;
   }
 
   .carousel {
@@ -611,7 +611,7 @@
     width: 256px;
     flex: 1 0 auto;
     object-fit: cover;
-    aspect-ratio: 2/1;
+    aspect-ratio: 324/151;
   }
 
   .summary-contents {
